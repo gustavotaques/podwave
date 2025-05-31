@@ -1,3 +1,0 @@
-Integrantes:
-
-Gustavo Vinicius Taques
