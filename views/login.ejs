@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- Importando a fonte Poppins do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Configurando o Tailwind para usar Poppins -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Garantindo que a fonte seja aplicada a todos os elementos */
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Removendo scroll global */
+    html, body, #root {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex min-h-screen flex-col lg:flex-row">
+    <!-- Lado Esquerdo (Formulário) -->
+    <div class="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl/9 text-[32px] font-bold tracking-tight text-gray-900">Bem vindo(a) Novamente!</h2>
+        <p class="mt-2 text-center text-base text-gray-600">Entre com suas credenciais para acessar a conta</p>
+      </div>
+    
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" action="/login" method="POST">
+          <div>
+            <label for="email" class="block text-sm/6 font-medium text-gray-900">Email</label>
+            <div class="mt-2">
+              <input type="email" name="email" placeholder="Entre com seu email" id="email" autocomplete="email" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-[#3A5B22] placeholder:text-gray-400 sm:text-sm/6">
+            </div>
+          </div>
+    
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="block text-sm/6 font-medium text-gray-900">Senha</label>
+              <div class="text-sm">
+                <a href="#" class="font-bold text-blue-600 hover:text-blue-800">Esqueceu a senha?</a>
+              </div>
+            </div>
+            <div class="mt-2">
+              <input type="password" name="password" placeholder="Entre com sua senha" id="password" autocomplete="current-password" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-[#3A5B22] placeholder:text-gray-400 sm:text-sm/6">
+            </div>
+          </div>
+    
+          <div>
+            <button type="submit" class="flex w-full justify-center rounded-md bg-[#3A5B22] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#2d491a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3A5B22]">Entrar</button>
+          </div>
+        </form>
+    
+        <p class="mt-10 text-center text-sm/6 text-gray-500">
+          Não tem uma conta?
+          <a href="/signup" class="font-bold text-blue-600 hover:text-blue-800">Cadastre-se</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Lado Direito (Imagem) -->
+    <div class="hidden flex-1 lg:block overflow-hidden">
+        <img src="/images/figura02.jpg" class="h-screen w-screen bg-cover bg-center rounded-tl-[45px] rounded-bl-[45px]">
+    </div>
+  </div>
+</body>
+</html>
