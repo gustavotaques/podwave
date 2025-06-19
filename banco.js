@@ -12,7 +12,7 @@ async function connectDB() {
             user: 'root',
             password: '',
             database: 'podwave',
-            charset: 'utf8mb4' // Adicionando suporte para UTF-8
+            charset: 'utf8mb4'
         }
     );
 
@@ -51,23 +51,24 @@ async function inserirPodcast(podcast) {
     podcast.poddescricao,
     podcast.podurl,
     podcast.usucodigo,
-    podcast.catcodigo || 10 // Default: 'Geral' (catcodigo 10)
+    podcast.catcodigo || (await buscarCatcodigoPorNome('Geral'))
   ]);
   return result;
 }
 
 async function buscarPodcastsPorUsuario(usucodigo) {
-    const conn = await global.connection;
-    try {
-        const [rows] = await conn.query(
-            'SELECT podcodigo, podnome, poddescricao, podurl, podcategoria FROM podcasts WHERE usucodigo = ?',
-            [usucodigo]
-        );
-        return rows;
-    } catch (err) {
-        console.error('Erro ao buscar podcasts:', err);
-        return [];
-    }
+  const conn = await connectDB();
+  try {
+    const [rows] = await conn.query(
+      'SELECT p.podcodigo, p.podnome, p.poddescricao, p.podurl, c.catnome AS podcategoria ' +
+      'FROM podcasts p JOIN categorias c ON p.catcodigo = c.catcodigo WHERE p.usucodigo = ?',
+      [usucodigo]
+    );
+    return rows;
+  } catch (err) {
+    console.error('Erro ao buscar podcasts por usuário:', err);
+    return [];
+  }
 }
 
 
@@ -126,6 +127,115 @@ async function inserirCategoria(catnome) {
   }
 }
 
+async function buscarPodcastPorId(podcodigo) {
+  const conn = await connectDB();
+  const [rows] = await conn.query(
+    'SELECT p.podcodigo, p.podnome, p.poddescricao, p.podurl, p.usucodigo, p.catcodigo, c.catnome AS podcategoria ' +
+    'FROM podcasts p JOIN categorias c ON p.catcodigo = c.catcodigo WHERE p.podcodigo = ?',
+    [podcodigo]
+  );
+  return rows[0] || null;
+}
+
+async function atualizarPodcast(podcast) {
+  const conn = await connectDB();
+  const sql = 'UPDATE podcasts SET podnome = ?, poddescricao = ?, podurl = ?, catcodigo = ? WHERE podcodigo = ? AND usucodigo = ?';
+  const [result] = await conn.query(sql, [
+    podcast.podnome,
+    podcast.poddescricao,
+    podcast.podurl,
+    podcast.catcodigo,
+    podcast.podcodigo,
+    podcast.usucodigo
+  ]);
+  return result.affectedRows > 0;
+}
+
+async function deletarPodcast(podcodigo, usucodigo) {
+  const conn = await connectDB();
+  const sql = 'DELETE FROM podcasts WHERE podcodigo = ? AND usucodigo = ?';
+  const [result] = await conn.query(sql, [podcodigo, usucodigo]);
+  return result.affectedRows > 0;
+}
+
+async function buscarCatcodigoPorNome(catnome) {
+  const conn = await connectDB();
+  const [rows] = await conn.query('SELECT catcodigo FROM categorias WHERE catnome = ?', [catnome]);
+  return rows[0]?.catcodigo || null;
+}
+
+async function buscarEpisodiosPorPodcast(podcodigo) {
+  const conn = await connectDB();
+  try {
+    const [rows] = await conn.query(
+      'SELECT epicodigo, podcodigo, epititulo, epidescricao, epiurl, epiduracao, epidata, epinumero, epireproducoes FROM episodios WHERE podcodigo = ?',
+      [podcodigo]
+    );
+    return rows;
+  } catch (err) {
+    console.error('Erro ao buscar episódios por podcast:', err);
+    return [];
+  }
+}
+
+// Função para inserir um episódio
+async function inserirEpisodio(episodio) {
+  const conn = await connectDB();
+  try {
+    const sql = 'INSERT INTO episodios (podcodigo, epititulo, epidescricao, epiurl, epiduracao, epidata, epinumero, epireproducoes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const [result] = await conn.query(sql, [
+      episodio.podcodigo,
+      episodio.epititulo,
+      episodio.epidescricao,
+      episodio.epiurl,
+      episodio.epiduracao,
+      episodio.epidata,
+      episodio.epinumero,
+      episodio.epireproducoes
+    ]);
+    return result.insertId;
+  } catch (err) {
+    console.error('Erro ao inserir episódio:', err);
+    return null;
+  }
+}
+
+// Função para atualizar um episódio
+async function atualizarEpisodio(episodio) {
+  const conn = await connectDB();
+  try {
+    const sql = 'UPDATE episodios SET epititulo = ?, epidescricao = ?, epiurl = ?, epiduracao = ?, epidata = ?, epinumero = ?, epireproducoes = ? WHERE epicodigo = ? AND podcodigo = ?';
+    const [result] = await conn.query(sql, [
+      episodio.epititulo,
+      episodio.epidescricao,
+      episodio.epiurl,
+      episodio.epiduracao,
+      episodio.epidata,
+      episodio.epinumero,
+      episodio.epireproducoes,
+      episodio.epicodigo,
+      episodio.podcodigo
+    ]);
+    return result.affectedRows > 0;
+  } catch (err) {
+    console.error('Erro ao atualizar episódio:', err);
+    return false;
+  }
+}
+
+// Função para deletar um episódio
+async function deletarEpisodio(epicodigo, podcodigo) {
+  const conn = await connectDB();
+  try {
+    const sql = 'DELETE FROM episodios WHERE epicodigo = ? AND podcodigo = ?';
+    const [result] = await conn.query(sql, [epicodigo, podcodigo]);
+    return result.affectedRows > 0;
+  } catch (err) {
+    console.error('Erro ao deletar episódio:', err);
+    return false;
+  }
+}
+
 connectDB()
 
 module.exports = {
@@ -135,7 +245,13 @@ module.exports = {
   buscarPodcastsPorUsuario,
   buscarTodosPodcasts,
   buscarPodcastsPorCategoria,
+  buscarPodcastPorId,
+  atualizarPodcast,
+  deletarPodcast,
   buscarCategorias,
   inserirPodcast,
-  inserirCategoria
+  buscarEpisodiosPorPodcast,
+  inserirEpisodio, // Novo
+  atualizarEpisodio, // Novo
+  deletarEpisodio // Novo
 };

@@ -59,7 +59,7 @@
       <div class="flex items-center justify-between" style="height: 72px;">
         <!-- Logo -->
         <div class="flex-shrink-0">
-          <a class="block text-[#3A5B22] hover:opacity-80 transition-opacity" href="/">
+          <a class="block text-[#3A5B22] hover:opacity-80 transition-opacity" href="<%= global.usuarioCodigo ? '/listas' : '/' %>">
             <span class="sr-only">Home</span>
             <svg class="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -92,28 +92,36 @@
               class="absolute end-0 z-10 mt-0.5 w-56 rounded-md border border-gray-100 bg-white shadow-lg hidden"
               role="menu">
               <div class="p-2">
-                <a href="#"
-                  class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                  role="menuitem">
-                  Meu perfil
-                </a>
-                <a href="#"
-                  class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                  role="menuitem">
-                  Gerenciar Podcasts
-                </a>
-                <form method="POST" action="#">
-                  <button type="submit"
-                    class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                <% if (global.usuarioCodigo) { %>
+                  <a href="#"
+                    class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                     role="menuitem">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                      stroke="currentColor" class="size-4">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                    </svg>
-                    Sair
-                  </button>
-                </form>
+                    Meu perfil
+                  </a>
+                  <a href="/meusPodcasts"
+                    class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                    role="menuitem">
+                    Gerenciar Podcasts
+                  </a>
+                  <form method="POST" action="/usuarios/logout">
+                    <button type="submit"
+                      class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                      role="menuitem">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                      </svg>
+                      Sair
+                    </button>
+                  </form>
+                <% } else { %>
+                  <a href="/usuarios/login"
+                    class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                    role="menuitem">
+                    Login
+                  </a>
+                <% } %>
               </div>
             </div>
           </div>
@@ -129,7 +137,6 @@
       <p class="mt-2 text-sm text-gray-600" style="font-size: 18px; line-height: 150%;">Descubra uma variedade de
         podcasts para todos os gostos</p>
     </div>
-
 
     <div class="bg-[#D7DED2] py-4 px-[64px] flex flex-wrap justify-center gap-4">
       <button
@@ -148,9 +155,9 @@
     </div>
 
     <div class="bg-[#D7DED2] py-8 px-[64px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-      <% if (podcasts && podcasts.length> 0) { %>
-        <% podcasts.forEach(podcast=> { %>
-          <div class="bg-white rounded-xl shadow-md overflow-hidden w-full max-w-sm">
+      <% if (podcasts && podcasts.length > 0) { %>
+        <% podcasts.forEach(podcast => { %>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden w-full max-w-sm cursor-pointer" onclick="window.location.href='/episodios/<%= podcast.podcodigo %>'">
             <img src="<%= podcast.podurl || '/images/figura02.jpg' %>" alt="Podcast Image"
               class="w-full h-64 object-cover">
             <div class="p-6">
@@ -174,12 +181,12 @@
               </div>
             </div>
           </div>
-          <% }); %>
-            <% } else { %>
-              <div class="col-span-full text-center text-gray-600">
-                <p>Nenhum podcast encontrado...</p>
-              </div>
-              <% } %>
+        <% }); %>
+      <% } else { %>
+        <div class="col-span-full text-center text-gray-600">
+          <p>Nenhum podcast encontrado...</p>
+        </div>
+      <% } %>
     </div>
 
     <footer class="bg-gray-100" style="height: 329px; background-color: #D7DED2;">
@@ -189,7 +196,7 @@
           <div class="flex-1 flex items-center justify-between py-16">
             <!-- Logo -->
             <div class="flex-shrink-0">
-              <a class="block text-[#3A5B22] hover:opacity-80 transition-opacity" href="/">
+              <a class="block text-[#3A5B22] hover:opacity-80 transition-opacity" href="<%= global.usuarioCodigo ? '/listas' : '/' %>">
                 <span class="sr-only">Home</span>
                 <svg class="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
