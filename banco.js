@@ -43,6 +43,19 @@ async function buscarUsuarioPorEmail(email) {
     return rows.length > 0 ? rows[0] : null;
 }
 
+async function inserirPodcast(podcast) {
+  const conn = await connectDB();
+  const sql = 'INSERT INTO podcasts (podnome, poddescricao, podurl, usucodigo, catcodigo) VALUES (?, ?, ?, ?, ?)';
+  const [result] = await conn.query(sql, [
+    podcast.podnome,
+    podcast.poddescricao,
+    podcast.podurl,
+    podcast.usucodigo,
+    podcast.catcodigo || 10 // Default: 'Geral' (catcodigo 10)
+  ]);
+  return result;
+}
+
 async function buscarPodcastsPorUsuario(usucodigo) {
     const conn = await global.connection;
     try {
@@ -57,22 +70,72 @@ async function buscarPodcastsPorUsuario(usucodigo) {
     }
 }
 
-async function buscarTodosPodcasts() {
-    const conn = await global.connection;
+
+async function buscarPodcastsPorCategoria(catcodigo) {
+    const conn = await connectDB();
     try {
         const [rows] = await conn.query(
-            'SELECT podcodigo, podnome, poddescricao, podurl, podcategoria FROM podcasts'
+            'SELECT p.podcodigo, p.podnome, p.poddescricao, p.podurl, c.catnome AS podcategoria ' +
+            'FROM podcasts p JOIN categorias c ON p.catcodigo = c.catcodigo WHERE c.catcodigo = ?',
+            [catcodigo]
         );
         return rows;
     } catch (err) {
-        console.error('Erro ao buscar todos os podcasts:', err);
+        console.error('Erro ao buscar podcasts por categoria:', err);
         return [];
     }
+}
+
+async function buscarTodosPodcasts() {
+  const conn = await connectDB();
+  try {
+    const [rows] = await conn.query(
+      'SELECT p.podcodigo, p.podnome, p.poddescricao, p.podurl, c.catnome AS podcategoria ' +
+      'FROM podcasts p JOIN categorias c ON p.catcodigo = c.catcodigo'
+    );
+    return rows;
+  } catch (err) {
+    console.error('Erro ao buscar todos os podcasts:', err);
+    return [];
+  }
+}
+
+async function buscarCategorias() {
+  const conn = await connectDB();
+  try {
+    const [rows] = await conn.query('SELECT catcodigo, catnome FROM categorias');
+    return rows;
+  } catch (err) {
+    console.error('Erro ao buscar categorias:', err);
+    return [];
+  }
+}
+
+async function inserirCategoria(catnome) {
+  const conn = await connectDB();
+  try {
+    const [result] = await conn.query(
+      'INSERT INTO categorias (catnome) VALUES (?) ON DUPLICATE KEY UPDATE catnome = ?',
+      [catnome, catnome]
+    );
+    const [row] = await conn.query('SELECT catcodigo FROM categorias WHERE catnome = ?', [catnome]);
+    return row[0].catcodigo;
+  } catch (err) {
+    console.error('Erro ao inserir categoria:', err);
+    return null;
+  }
 }
 
 connectDB()
 
 module.exports = {
-    buscarUsuario, inserirUsuario, buscarUsuarioPorEmail,
-    buscarPodcastsPorUsuario, buscarTodosPodcasts
+  buscarUsuario,
+  inserirUsuario,
+  buscarUsuarioPorEmail,
+  buscarPodcastsPorUsuario,
+  buscarTodosPodcasts,
+  buscarPodcastsPorCategoria,
+  buscarCategorias,
+  inserirPodcast,
+  inserirCategoria
 };
