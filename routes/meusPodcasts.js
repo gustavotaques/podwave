@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const {
-  buscarPodcastsPorUsuario,
-  inserirPodcast,
-  buscarPodcastPorId,
-  atualizarPodcast,
-  deletarPodcast,
-  buscarCategorias
+    buscarPodcastsPorUsuario,
+    inserirPodcast,
+    buscarPodcastPorId,
+    atualizarPodcast,
+    deletarPodcast,
+    buscarCategorias
 } = require('../banco');
 
 router.get('/', async function(req, res, next) { 
@@ -88,10 +88,12 @@ router.post('/adicionar', async function(req, res, next) {
   }
 });
 
-router.post('/atualizar', async function(req, res, next) { 
+// Atualizar usando POST /editar/:podcodigo
+router.post('/editar/:podcodigo', async function(req, res, next) { 
   if (!global.usuarioCodigo) return res.redirect('/login');
   try {
-    const { podcodigo, podnome, poddescricao, podurl, catcodigo } = req.body;
+    const podcodigo = req.params.podcodigo;
+    const { podnome, poddescricao, podurl, catcodigo } = req.body;
     await atualizarPodcast({
       podcodigo: parseInt(podcodigo),
       podnome,
@@ -103,7 +105,7 @@ router.post('/atualizar', async function(req, res, next) {
     res.redirect('/meusPodcasts');
   } catch (err) {
     console.error('Erro ao atualizar podcast:', err);
-    res.redirect('/meusPodcasts?error=Erro ao atualizar podcast');
+    res.redirect(`/meusPodcasts/editar/${podcodigo}?error=Erro ao atualizar podcast`);
   }
 });
 

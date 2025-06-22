@@ -12,7 +12,7 @@
     <% if (query.error) { %>
       <p class="text-red-500 mb-4"><%= query.error %></p>
     <% } %>
-    <form action="/meusPodcasts/atualizar" method="POST" class="max-w-md">
+    <form action="/meusPodcasts/editar/<%= podcast.podcodigo %>" method="POST" class="max-w-md">
       <input type="hidden" name="podcodigo" value="<%= podcast.podcodigo %>">
       <div class="mb-4">
         <label for="podnome" class="block text-sm font-medium">Nome</label>

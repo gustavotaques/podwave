@@ -27,14 +27,15 @@ CREATE TABLE `avaliacoes` (
   `usucodigo` int(11) NOT NULL,
   `podcodigo` int(11) NOT NULL,
   `avanota` int(1) NOT NULL CHECK (`avanota` between 1 and 5),
-  `avacomentario` text DEFAULT NULL,
+  `avacomentario` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `avadata` datetime NOT NULL DEFAULT current_timestamp(),
+  `epicodigo` int(11) NOT NULL,
   PRIMARY KEY (`avacodigo`),
-  UNIQUE KEY `usucodigo` (`usucodigo`,`podcodigo`),
-  KEY `podcodigo` (`podcodigo`),
+  UNIQUE KEY `usucodigo` (`usucodigo`,`epicodigo`),
+  KEY `avaliacoes_ibfk_3` (`epicodigo`),
   CONSTRAINT `avaliacoes_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
-  CONSTRAINT `avaliacoes_ibfk_2` FOREIGN KEY (`podcodigo`) REFERENCES `podcasts` (`podcodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `avaliacoes_ibfk_3` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,33 @@ CREATE TABLE `avaliacoes` (
 
 LOCK TABLES `avaliacoes` WRITE;
 /*!40000 ALTER TABLE `avaliacoes` DISABLE KEYS */;
+INSERT INTO `avaliacoes` VALUES (1,1,0,5,NULL,'2025-06-22 00:00:00',4);
 /*!40000 ALTER TABLE `avaliacoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categorias`
+--
+
+DROP TABLE IF EXISTS `categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categorias` (
+  `catcodigo` int(11) NOT NULL AUTO_INCREMENT,
+  `catnome` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`catcodigo`),
+  UNIQUE KEY `catnome` (`catnome`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categorias`
+--
+
+LOCK TABLES `categorias` WRITE;
+/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
+INSERT INTO `categorias` VALUES (2,'Cinema'),(4,'Educa‡Æo'),(1,'Empreendedorismo'),(3,'Esportes'),(5,'Games'),(10,'Geral'),(8,'Hist¢ria'),(7,'M£sica'),(6,'Meio Ambiente'),(9,'Tecnologia');
+/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -57,14 +84,15 @@ CREATE TABLE `comentarios` (
   `comcodigo` int(11) NOT NULL AUTO_INCREMENT,
   `usucodigo` int(11) NOT NULL,
   `podcodigo` int(11) NOT NULL,
-  `comtexto` text NOT NULL,
+  `comtexto` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `comdata` datetime NOT NULL DEFAULT current_timestamp(),
+  `epicodigo` int(11) NOT NULL,
   PRIMARY KEY (`comcodigo`),
   KEY `usucodigo` (`usucodigo`),
-  KEY `podcodigo` (`podcodigo`),
+  KEY `comentarios_ibfk_3` (`epicodigo`),
   CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
-  CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`podcodigo`) REFERENCES `podcasts` (`podcodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `comentarios_ibfk_3` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +101,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
+INSERT INTO `comentarios` VALUES (1,1,0,'Aqui eu farei o primeiro comentario','2025-06-22 00:00:00',4),(2,1,0,'oi','2025-06-22 00:00:00',4),(3,1,0,'terceiro','2025-06-22 00:00:00',4);
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,14 +115,24 @@ DROP TABLE IF EXISTS `episodios`;
 CREATE TABLE `episodios` (
   `epicodigo` int(11) NOT NULL AUTO_INCREMENT,
   `podcodigo` int(11) NOT NULL,
-  `epititulo` varchar(100) NOT NULL,
-  `epidescricao` text DEFAULT NULL,
-  `epiurl` varchar(255) NOT NULL,
+  `epititulo` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `epidescricao` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `epiurl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `epiduracao` int(11) DEFAULT NULL,
+  `epidata` datetime DEFAULT current_timestamp(),
+  `epistatus` enum('ativo','inativo','rascunho') COLLATE utf8mb4_unicode_ci DEFAULT 'ativo',
+  `epidataatualizacao` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `epinumero` int(11) DEFAULT 0,
+  `epiduracao_segundos` int(11) DEFAULT 0,
+  `usucodigo` int(11) DEFAULT NULL,
+  `epireproducoes` int(11) DEFAULT 0,
+  `epiaudio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`epicodigo`),
   KEY `podcodigo` (`podcodigo`),
-  CONSTRAINT `episodios_ibfk_1` FOREIGN KEY (`podcodigo`) REFERENCES `podcasts` (`podcodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `usucodigo` (`usucodigo`),
+  CONSTRAINT `episodios_ibfk_1` FOREIGN KEY (`podcodigo`) REFERENCES `podcasts` (`podcodigo`) ON DELETE CASCADE,
+  CONSTRAINT `episodios_ibfk_2` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,6 +141,7 @@ CREATE TABLE `episodios` (
 
 LOCK TABLES `episodios` WRITE;
 /*!40000 ALTER TABLE `episodios` DISABLE KEYS */;
+INSERT INTO `episodios` VALUES (2,9,'Epis¢dio 1','Primeiro epis¢dio','/images/figura02.jpg',30,'2025-06-19 00:00:00','ativo',NULL,1,0,NULL,150,NULL),(4,19,'Fluminense bate Ulsan','Foi um jogo do caraio','teste 3',120,'2025-06-22 00:00:00','ativo','2025-06-22 16:48:50',0,0,1,0,'episodio1.mp3');
 /*!40000 ALTER TABLE `episodios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,12 +156,13 @@ CREATE TABLE `favoritos` (
   `favcodigo` int(11) NOT NULL AUTO_INCREMENT,
   `usucodigo` int(11) NOT NULL,
   `podcodigo` int(11) NOT NULL,
+  `epicodigo` int(11) NOT NULL,
   PRIMARY KEY (`favcodigo`),
-  UNIQUE KEY `usucodigo` (`usucodigo`,`podcodigo`),
-  KEY `podcodigo` (`podcodigo`),
+  UNIQUE KEY `usucodigo` (`usucodigo`,`epicodigo`),
+  KEY `favoritos_ibfk_3` (`epicodigo`),
   CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
-  CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`podcodigo`) REFERENCES `podcasts` (`podcodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `favoritos_ibfk_3` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,15 +183,17 @@ DROP TABLE IF EXISTS `podcasts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `podcasts` (
   `podcodigo` int(11) NOT NULL AUTO_INCREMENT,
-  `podnome` varchar(100) NOT NULL,
-  `poddescricao` text DEFAULT NULL,
-  `podurl` varchar(255) DEFAULT NULL,
+  `podnome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `poddescricao` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `podurl` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `usucodigo` int(11) NOT NULL,
-  `podcategoria` varchar(50) NOT NULL DEFAULT 'Geral',
+  `catcodigo` int(11) NOT NULL DEFAULT 10,
   PRIMARY KEY (`podcodigo`),
   KEY `usucodigo` (`usucodigo`),
-  CONSTRAINT `podcasts_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  KEY `podcasts_ibfk_2` (`catcodigo`),
+  CONSTRAINT `podcasts_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
+  CONSTRAINT `podcasts_ibfk_2` FOREIGN KEY (`catcodigo`) REFERENCES `categorias` (`catcodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +202,7 @@ CREATE TABLE `podcasts` (
 
 LOCK TABLES `podcasts` WRITE;
 /*!40000 ALTER TABLE `podcasts` DISABLE KEYS */;
-INSERT INTO `podcasts` VALUES (9,'Inova‡Æo Hoje','Explorando ideias disruptivas','/images/figura02.jpg',4,'Empreendedorismo'),(10,'CineCult','An lises profundas do cinema independente','/images/figura02.jpg',6,'Cinema'),(11,'ArenaCast','Debates esportivos com especialistas','/images/figura02.jpg',3,'Esportes'),(12,'Mentes Curiosas','Descubra curiosidades do mundo','/images/figura02.jpg',2,'Educa‡Æo'),(13,'GameZone','Not¡cias e reviews do mundo gamer','/images/figura02.jpg',5,'Games'),(14,'Planeta Verde','Conversas sobre meio ambiente e sustentabilidade','/images/figura02.jpg',7,'Meio Ambiente'),(15,'Nota Musical','Entrevistas e lan‡amentos musicais','/images/figura02.jpg',8,'M£sica'),(16,'Caf‚ com Hist¢ria','Fatos e personagens que marcaram o mundo','/images/figura02.jpg',2,'Hist¢ria'),(17,'C¢digo Aberto','Programa‡Æo, software livre e tecnologia','/images/figura02.jpg',6,'Tecnologia');
+INSERT INTO `podcasts` VALUES (9,'Inova‡Æo Hoje','Explorando ideias disruptivas','/images/figura02.jpg',4,1),(10,'CineCult','An lises profundas do cinema independente','/images/figura02.jpg',6,2),(11,'ArenaCast','Debates esportivos com especialistas','/images/figura02.jpg',3,3),(12,'Mentes Curiosas','Descubra curiosidades do mundo','/images/figura02.jpg',2,4),(13,'GameZone','Not¡cias e reviews do mundo gamer','/images/figura02.jpg',5,5),(14,'Planeta Verde','Conversas sobre meio ambiente e sustentabilidade','/images/figura02.jpg',7,6),(15,'Nota Musical','Entrevistas e lan‡amentos musicais','/images/figura02.jpg',8,7),(16,'Caf‚ com Hist¢ria','Fatos e personagens que marcaram o mundo','/images/figura02.jpg',2,8),(17,'C¢digo Aberto','Programa‡Æo, software livre e tecnologia','/images/figura02.jpg',6,9),(19,'Teste','apenas um teste atualizado 2','/images/figura02.jpg',1,10),(21,'Teste 1000','este teste é 10','/images/figura02.jpg',1,9);
 /*!40000 ALTER TABLE `podcasts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,11 +220,11 @@ CREATE TABLE `progresso_reproducao` (
   `proprogresso` int(11) NOT NULL,
   `prodata` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`procodigo`),
-  KEY `usucodigo` (`usucodigo`),
+  UNIQUE KEY `usucodigo` (`usucodigo`,`epicodigo`),
   KEY `epicodigo` (`epicodigo`),
   CONSTRAINT `progresso_reproducao_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
   CONSTRAINT `progresso_reproducao_ibfk_2` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-31 14:32:40
+-- Dump completed on 2025-06-22 17:35:23

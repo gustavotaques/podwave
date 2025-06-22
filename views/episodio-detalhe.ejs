@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Importando a fonte Poppins do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configurando o Tailwind para usar Poppins -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Garantindo que a fonte seja aplicada a todos os elementos */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #D7DED2;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Botão com bordas arredondadas */
+        .btn-rounded {
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-rounded:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Estilo para o botão ativo */
+        .filter-btn.active {
+            background-color: #e5e7eb;
+            /* bg-gray-200 */
+            border-color: #4b5563;
+            /* border-gray-600 */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="backdrop-blur-sm" style="background-color: #D7DED2;">
+        <div class="w-full px-[64px]">
+            <div class="flex items-center justify-between" style="height: 72px;">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a class="block text-[#3A5B22] hover:opacity-80 transition-opacity"
+                        href="<%= global.usuarioCodigo ? '/listas' : '/' %>">
+                        <span class="sr-only">Home</span>
+                        <svg class="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
+                                fill="currentColor" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-3 md:gap-12">
+                    <!-- Menu de Navegação Desktop -->
+                    <nav aria-label="Global" class="hidden md:block">
+                        <ul class="flex items-center gap-6 text-sm">
+                            <li>
+                                <a class="text-gray-700 hover:text-gray-900 transition-colors font-medium" href="#">Meus
+                                    Favoritos</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Ícone de Usuário com Menu -->
+                    <div class="relative hidden md:block">
+                        <button type="button" id="user-menu-toggle"
+                            class="overflow-hidden rounded-full border border-gray-300 shadow-inner">
+                            <span class="sr-only">Toggle dashboard menu</span>
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="" class="size-10 object-cover" />
+                        </button>
+                        <div id="user-menu"
+                            class="absolute end-0 z-10 mt-0.5 w-56 rounded-md border border-gray-100 bg-white shadow-lg hidden"
+                            role="menu">
+                            <div class="p-2">
+                                <% if (global.usuarioCodigo) { %>
+                                    <a href="#"
+                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                        role="menuitem">
+                                        Meu perfil
+                                    </a>
+                                    <a href="/meusPodcasts"
+                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                        role="menuitem">
+                                        Gerenciar Podcasts
+                                    </a>
+                                    <form method="POST" action="/usuarios/logout">
+                                        <button type="submit"
+                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                            role="menuitem">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                                            </svg>
+                                            Sair
+                                        </button>
+                                    </form>
+                                    <% } else { %>
+                                        <a href="/usuarios/login"
+                                            class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                            role="menuitem">
+                                            Login
+                                        </a>
+                                        <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="px-[64px] py-8">
+        <div class="max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold text-[#3A5B22] mb-4">
+                <%= episodio.epititulo %>
+            </h1>
+            <p class="text-sm text-gray-600 mb-4">
+                <%= podnome %>
+            </p>
+
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <p class="mb-2"><strong>Descrição:</strong>
+                    <%= episodio.epidescricao || 'Sem descrição' %>
+                </p>
+                <p class="mb-2"><strong>URL:</strong> <a href="<%= episodio.epiurl %>" target="_blank"
+                        class="text-[#3A5B22] hover:underline">
+                        <%= episodio.epiurl %>
+                    </a></p>
+                <p class="mb-2"><strong>Duração:</strong>
+                    <%= episodio.epiduracao_segundos ? `${episodio.epiduracao_segundos} segundos` : 'Não informada' %>
+                </p>
+                <p class="mb-2"><strong>Data:</strong>
+                    <%= episodio.epidata %>
+                </p>
+                <p class="mb-2"><strong>Reproduções:</strong>
+                    <%= episodio.epireproducoes %>
+                </p>
+            </div>
+
+            <!-- Player de Áudio -->
+            <div class="bg-[#3A5B22] p-4 rounded-lg shadow-md mb-6 text-white" style="max-width: 820px;">
+                <div class="flex items-center">
+                    <div class="w-36">
+                        <img width="150" height="150" style="border-radius: 8px" src="https://via.placeholder.com/150"
+                            alt="Capa do episódio" />
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <small style="opacity: 0.7">PODWAVE • EPISÓDIO <%= episodio.epicodigo %></small>
+                        <h3 class="text-lg font-semibold">
+                            <%= episodio.epititulo %>
+                        </h3>
+                        <audio controls style="width: 100%; opacity: 0.7; margin-top: 8px;" id="audio-player">
+                            <source src="/episodios/<%= episodio.podcodigo %>/<%= episodio.epicodigo %>/audio"
+                                type="audio/mpeg" />
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                        <div class="mt-2 flex justify-between items-center text-sm">
+                            <form action="/episodios/<%= episodio.podcodigo %>/<%= episodio.epicodigo %>/favoritar"
+                                method="POST" class="mr-4">
+                                <button type="submit"
+                                    class="bg-white text-[#3A5B22] px-3 py-1 rounded hover:bg-gray-200">
+                                    <%= isFavorito ? 'Desfavoritar' : 'Favoritar' %>
+                                </button>
+                            </form>
+                            <form id="rating-form"
+                                action="/episodios/<%= episodio.podcodigo %>/<%= episodio.epicodigo %>/avaliar"
+                                method="POST" class="inline-flex items-center space-x-1">
+                                <input type="hidden" name="nota" id="rating-input">
+                                <div id="star-rating" class="inline-flex items-center space-x-1">
+                                    <% for(let i=1; i <=5; i++) { %>
+                                        <span data-rating="<%= i %>" class="cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                class="w-6 h-6 <%= i <= (avaliacaoUsuario || 0) ? 'text-yellow-700' : 'text-gray-400' %>">
+                                                <path fill-rule="evenodd"
+                                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <% } %>
+                                </div>
+                                <span id="rating-feedback" class="ml-2 text-sm text-white">
+                                    <%= avaliacaoUsuario ? `${avaliacaoUsuario} estrela${avaliacaoUsuario> 1 ? 's' :
+                                        ''}` : 'Não avaliado' %>
+                                </span>
+                            </form>
+                        </div>
+                        <div class="mt-2 flex justify-between text-sm">
+                            <a href="#" class="text-white opacity-70 hover:opacity-100" title="Assinar">ASSINAR</a>
+                            <a href="#" class="text-white opacity-70 hover:opacity-100"
+                                title="Compartilhar">COMPARTILHAR</a>
+                            <a href="#" class="text-white opacity-70 hover:opacity-100" title="Mais informações">MAIS
+                                INFO</a>
+                            <span class="text-white opacity-70">PodWave</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progresso -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <h3 class="text-xl font-semibold text-[#3A5B22] mb-4">Progresso</h3>
+                <p class="text-gray-600 mb-2">Progresso atual: <%= progresso %> segundos</p>
+                <form action="/episodios/<%= episodio.podcodigo %>/<%= episodio.epicodigo %>/progresso" method="POST">
+                    <input type="number" name="progresso_segundos" value="<%= progresso %>"
+                        class="p-2 border rounded text-gray-900" required>
+                    <button type="submit"
+                        class="bg-[#3A5B22] text-white px-4 py-2 rounded hover:bg-[#2F4A1B] ml-2">Atualizar
+                        Progresso</button>
+                </form>
+            </div>
+
+            <!-- Comentários -->
+            <section class="bg-[#D7DED2] py-8 lg:py-16 antialiased">
+                <div class="max-w-2xl mx-auto px-[64px]">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-lg lg:text-2xl font-bold text-[#3A5B22]">Comentários (<%= comentarios.length %>)
+                        </h2>
+                    </div>
+                    <form action="/episodios/<%= episodio.podcodigo %>/<%= episodio.epicodigo %>/comentar" method="POST"
+                        class="mb-6">
+                        <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                            <label for="comment" class="sr-only">Seu comentário</label>
+                            <textarea id="comment" name="comentario" rows="6"
+                                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                                placeholder="Escreva um comentário..." required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-white bg-[#3A5B22] rounded-lg hover:bg-[#2F4A1B] focus:ring-4 focus:ring-[#4A6B32]">
+                            Enviar comentário
+                        </button>
+                    </form>
+                    <% if (comentarios && comentarios.length> 0) { %>
+                        <% comentarios.forEach(comentario=> { %>
+                            <article class="p-6 mb-3 text-base bg-white rounded-lg border-t border-gray-200">
+                                <footer class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center">
+                                        <p class="inline-flex items-center mr-3 text-sm text-[#3A5B22] font-semibold">
+                                            <img class="mr-2 w-6 h-6 rounded-full" src="https://via.placeholder.com/24"
+                                                alt="<%= comentario.usuarioEmail %>">
+                                            <%= comentario.usuarioEmail %>
+                                        </p>
+                                        <p class="text-sm text-gray-600"><time pubdate
+                                                datetime="<%= comentario.comdata %>"
+                                                title="<%= new Date(comentario.comdata).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' }) %>">
+                                                <%= new Date(comentario.comdata).toLocaleDateString('pt-BR', {
+                                                    month: 'short' , day: 'numeric' , year: 'numeric' }) %>
+                                            </time></p>
+                                    </div>
+                                    <button id="dropdownComment<%= comentario.comcodigo %>Button"
+                                        data-dropdown-toggle="dropdownComment<%= comentario.comcodigo %>"
+                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700"
+                                        type="button">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 16 3">
+                                            <path
+                                                d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                        </svg>
+                                        <span class="sr-only">Configurações do comentário</span>
+                                    </button>
+                                    <div id="dropdownComment<%= comentario.comcodigo %>"
+                                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow">
+                                        <ul class="py-1 text-sm text-gray-700"
+                                            aria-labelledby="dropdownMenuIconHorizontalButton">
+                                            <li><a href="#" class="block py-2 px-4 hover:bg-gray-100">Editar</a></li>
+                                            <li><a href="#" class="block py-2 px-4 hover:bg-gray-100">Remover</a></li>
+                                            <li><a href="#" class="block py-2 px-4 hover:bg-gray-100">Reportar</a></li>
+                                        </ul>
+                                    </div>
+                                </footer>
+                                <p class="text-gray-600">
+                                    <%= comentario.comtexto %>
+                                </p>
+                                <div class="flex items-center mt-4 space-x-4">
+                                    <button type="button"
+                                        class="flex items-center text-sm text-gray-600 hover:underline font-medium">
+                                        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                                        </svg>
+                                        Responder
+                                    </button>
+                                </div>
+                            </article>
+                            <% }); %>
+                                <% } else { %>
+                                    <p class="text-gray-600">Nenhum comentário ainda...</p>
+                                    <% } %>
+                </div>
+            </section>
+
+            <a href="/episodios/<%= episodio.podcodigo %>"
+                class="text-[#3A5B22] hover:underline mt-6 block text-center">Voltar para lista de episódios</a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100" style="height: 329px; background-color: #D7DED2;">
+        <div class="w-full px-[64px] h-full">
+            <div class="flex flex-col h-full">
+                <!-- Conteúdo principal do footer -->
+                <div class="flex-1 flex items-center justify-between py-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a class="block text-[#3A5B22] hover:opacity-80 transition-opacity"
+                            href="<%= global.usuarioCodigo ? '/listas' : '/' %>">
+                            <span class="sr-only">Home</span>
+                            <svg class="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Links de navegação -->
+                    <nav class="flex items-center gap-12">
+                        <a class="text-gray-700 hover:text-gray-900 transition-colors font-medium" href="#">Sobre
+                            Nós</a>
+                        <a class="text-gray-700 hover:text-gray-900 transition-colors font-medium" href="#">Fale
+                            Conosco</a>
+                        <a class="text-gray-700 hover:text-gray-900 transition-colors font-medium" href="#">Nossos
+                            Podcasts</a>
+                    </nav>
+
+                    <!-- Ícones das redes sociais -->
+                    <div class="flex items-center gap-4">
+                        <!-- Facebook -->
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <!-- X (Twitter) -->
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <!-- YouTube -->
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Linha divisória -->
+                <div class="border-t border-gray-500"></div>
+
+                <!-- Copyright -->
+                <div class="py-6 text-center">
+                    <p class="text-gray-600 text-sm">© 2025 PodWave. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript para alternar o menu ao clicar no botão
+        const userMenuToggle = document.getElementById('user-menu-toggle');
+        const userMenu = document.getElementById('user-menu');
+
+        userMenuToggle.addEventListener('click', () => {
+            userMenu.classList.toggle('hidden');
+        });
+
+        // Fechar o menu ao clicar fora
+        document.addEventListener('click', (event) => {
+            if (!userMenuToggle.contains(event.target) && !userMenu.contains(event.target)) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+        // Toggle para dropdowns de comentários
+        document.querySelectorAll('[data-dropdown-toggle]').forEach(button => {
+            button.addEventListener('click', () => {
+                const dropdownId = button.getAttribute('data-dropdown-toggle');
+                const dropdown = document.getElementById(dropdownId);
+                dropdown.classList.toggle('hidden');
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            document.querySelectorAll('.z-10').forEach(dropdown => {
+                if (!dropdown.contains(event.target) && !event.target.hasAttribute('data-dropdown-toggle')) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+
+        // Sistema de avaliação com estrelas usando formulário
+        const starRating = document.getElementById('star-rating');
+        const ratingForm = document.getElementById('rating-form');
+        const ratingInput = document.getElementById('rating-input');
+        const ratingFeedback = document.getElementById('rating-feedback');
+        let currentRating = `<%= avaliacaoUsuario || 0 %>`;
+
+        starRating.addEventListener('click', (e) => {
+            const star = e.target.closest('span[data-rating]');
+            if (star) {
+                const rating = parseInt(star.getAttribute('data-rating'));
+                currentRating = rating;
+
+                // Atualiza as estrelas visualmente
+                starRating.querySelectorAll('span[data-rating]').forEach(s => {
+                    const starValue = parseInt(s.getAttribute('data-rating'));
+                    s.querySelector('svg').classList.toggle('text-yellow-700', starValue <= rating);
+                    s.querySelector('svg').classList.toggle('text-gray-400', starValue > rating);
+                });
+
+                // Atualiza o campo oculto e o feedback
+                ratingInput.value = rating;
+                ratingFeedback.textContent = `Sua avaliação: ${currentRating} estrela${currentRating > 1 ? 's' : ''}`;
+
+                // Envia o formulário
+                ratingForm.submit();
+            }
+        });
+
+        // Inicializa as estrelas com o valor atual
+        starRating.querySelectorAll('span[data-rating]').forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-rating'));
+            star.querySelector('svg').classList.toggle('text-yellow-700', starValue <= currentRating);
+            star.querySelector('svg').classList.toggle('text-gray-400', starValue > currentRating);
+        });
+    </script>
+</body>
+
+</html>
