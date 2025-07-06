@@ -35,7 +35,7 @@ CREATE TABLE `avaliacoes` (
   KEY `avaliacoes_ibfk_3` (`epicodigo`),
   CONSTRAINT `avaliacoes_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
   CONSTRAINT `avaliacoes_ibfk_3` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `avaliacoes` (
 
 LOCK TABLES `avaliacoes` WRITE;
 /*!40000 ALTER TABLE `avaliacoes` DISABLE KEYS */;
-INSERT INTO `avaliacoes` VALUES (1,1,0,5,NULL,'2025-06-22 00:00:00',4);
+INSERT INTO `avaliacoes` VALUES (1,1,0,5,NULL,'2025-06-22 00:00:00',4),(6,4,4,3,'nota atribuida ao episodio 4','2025-07-03 22:14:49',4);
 /*!40000 ALTER TABLE `avaliacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `comentarios` (
   KEY `comentarios_ibfk_3` (`epicodigo`),
   CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
   CONSTRAINT `comentarios_ibfk_3` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (1,1,0,'Aqui eu farei o primeiro comentario','2025-06-22 00:00:00',4),(2,1,0,'oi','2025-06-22 00:00:00',4),(3,1,0,'terceiro','2025-06-22 00:00:00',4);
+INSERT INTO `comentarios` VALUES (1,1,0,'Aqui eu farei o primeiro comentario','2025-06-22 00:00:00',4),(2,1,0,'oi','2025-06-22 00:00:00',4),(3,1,0,'terceiro','2025-06-22 00:00:00',4),(8,3,4,'comentario numero 5 sobre o episodio','2025-07-03 22:14:49',4);
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +132,7 @@ CREATE TABLE `episodios` (
   KEY `usucodigo` (`usucodigo`),
   CONSTRAINT `episodios_ibfk_1` FOREIGN KEY (`podcodigo`) REFERENCES `podcasts` (`podcodigo`) ON DELETE CASCADE,
   CONSTRAINT `episodios_ibfk_2` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,9 +141,29 @@ CREATE TABLE `episodios` (
 
 LOCK TABLES `episodios` WRITE;
 /*!40000 ALTER TABLE `episodios` DISABLE KEYS */;
-INSERT INTO `episodios` VALUES (2,9,'Epis¢dio 1','Primeiro epis¢dio','/images/figura02.jpg',30,'2025-06-19 00:00:00','ativo',NULL,1,0,NULL,150,NULL),(4,19,'Fluminense bate Ulsan','Foi um jogo do caraio','teste 3',120,'2025-06-22 00:00:00','ativo','2025-06-22 16:48:50',0,0,1,0,'episodio1.mp3');
+INSERT INTO `episodios` VALUES (2,9,'Epis¢dio 1','Primeiro epis¢dio','/images/figura02.jpg',30,'2025-06-19 00:00:00','ativo',NULL,1,0,NULL,150,NULL),(4,19,'Fluminense bate Ulsan','Teste para trigger','teste 3',120,'2025-07-04 00:00:00','ativo','2025-07-04 17:54:39',0,0,1,0,'episodio1.mp3');
 /*!40000 ALTER TABLE `episodios` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = latin1 */ ;
+/*!50003 SET character_set_results = latin1 */ ;
+/*!50003 SET collation_connection  = latin1_swedish_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 trigger atualiza_data_atualizacao_episodio
+before update on episodios
+for each row
+begin
+    set new.epidataatualizacao = current_timestamp();
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `favoritos`
@@ -162,7 +182,7 @@ CREATE TABLE `favoritos` (
   KEY `favoritos_ibfk_3` (`epicodigo`),
   CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
   CONSTRAINT `favoritos_ibfk_3` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +191,7 @@ CREATE TABLE `favoritos` (
 
 LOCK TABLES `favoritos` WRITE;
 /*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
+INSERT INTO `favoritos` VALUES (2,4,2,2),(6,1,19,4);
 /*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +214,7 @@ CREATE TABLE `podcasts` (
   KEY `podcasts_ibfk_2` (`catcodigo`),
   CONSTRAINT `podcasts_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
   CONSTRAINT `podcasts_ibfk_2` FOREIGN KEY (`catcodigo`) REFERENCES `categorias` (`catcodigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,9 +223,26 @@ CREATE TABLE `podcasts` (
 
 LOCK TABLES `podcasts` WRITE;
 /*!40000 ALTER TABLE `podcasts` DISABLE KEYS */;
-INSERT INTO `podcasts` VALUES (9,'Inova‡Æo Hoje','Explorando ideias disruptivas','/images/figura02.jpg',4,1),(10,'CineCult','An lises profundas do cinema independente','/images/figura02.jpg',6,2),(11,'ArenaCast','Debates esportivos com especialistas','/images/figura02.jpg',3,3),(12,'Mentes Curiosas','Descubra curiosidades do mundo','/images/figura02.jpg',2,4),(13,'GameZone','Not¡cias e reviews do mundo gamer','/images/figura02.jpg',5,5),(14,'Planeta Verde','Conversas sobre meio ambiente e sustentabilidade','/images/figura02.jpg',7,6),(15,'Nota Musical','Entrevistas e lan‡amentos musicais','/images/figura02.jpg',8,7),(16,'Caf‚ com Hist¢ria','Fatos e personagens que marcaram o mundo','/images/figura02.jpg',2,8),(17,'C¢digo Aberto','Programa‡Æo, software livre e tecnologia','/images/figura02.jpg',6,9),(19,'Teste','apenas um teste atualizado 2','/images/figura02.jpg',1,10),(21,'Teste 1000','este teste é 10','/images/figura02.jpg',1,9);
+INSERT INTO `podcasts` VALUES (9,'Inova‡Æo Hoje','Explorando ideias disruptivas','/images/figura02.jpg',4,1),(10,'CineCult','An lises profundas do cinema independente','/images/figura02.jpg',6,2),(11,'ArenaCast','Debates esportivos com especialistas','/images/figura02.jpg',3,3),(12,'Mentes Curiosas','Descubra curiosidades do mundo','/images/figura02.jpg',2,4),(13,'GameZone','Not¡cias e reviews do mundo gamer','/images/figura02.jpg',5,5),(14,'Planeta Verde','Conversas sobre meio ambiente e sustentabilidade','/images/figura02.jpg',7,6),(15,'Nota Musical','Entrevistas e lan‡amentos musicais','/images/figura02.jpg',8,7),(16,'Caf‚ com Hist¢ria','Fatos e personagens que marcaram o mundo','/images/figura02.jpg',2,8),(17,'C¢digo Aberto','Programa‡Æo, software livre e tecnologia','/images/figura02.jpg',6,9),(19,'Teste','apenas um teste atualizado 2','/images/figura02.jpg',1,10),(21,'Teste 1000','este teste é 10','/images/figura02.jpg',1,9),(23,'cafe com dados','discussoes sobre o impacto dos dados no dia a dia','/images/figura01.jpg',4,1),(24,'historias do amanha','narrativas sobre possiveis futuros','/images/figura02.jpg',8,2),(25,'voz da ciencia','entrevistas com cientistas renomados','/images/figura03.jpg',3,3),(26,'tecnologia explicada','conceitos tecnologicos para leigos','/images/figura04.jpg',5,4),(27,'debate esportivo','comentarios sobre jogos e jogadores','/images/figura05.jpg',4,5);
 /*!40000 ALTER TABLE `podcasts` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `progresso_por_episodio`
+--
+
+DROP TABLE IF EXISTS `progresso_por_episodio`;
+/*!50001 DROP VIEW IF EXISTS `progresso_por_episodio`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `progresso_por_episodio` (
+  `usunome` tinyint NOT NULL,
+  `epititulo` tinyint NOT NULL,
+  `podnome` tinyint NOT NULL,
+  `proprogresso` tinyint NOT NULL,
+  `prodata` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `progresso_reproducao`
@@ -224,7 +262,7 @@ CREATE TABLE `progresso_reproducao` (
   KEY `epicodigo` (`epicodigo`),
   CONSTRAINT `progresso_reproducao_ibfk_1` FOREIGN KEY (`usucodigo`) REFERENCES `usuarios` (`usucodigo`) ON DELETE CASCADE,
   CONSTRAINT `progresso_reproducao_ibfk_2` FOREIGN KEY (`epicodigo`) REFERENCES `episodios` (`epicodigo`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,8 +271,25 @@ CREATE TABLE `progresso_reproducao` (
 
 LOCK TABLES `progresso_reproducao` WRITE;
 /*!40000 ALTER TABLE `progresso_reproducao` DISABLE KEYS */;
+INSERT INTO `progresso_reproducao` VALUES (1,3,2,51,'2025-07-03 22:14:49');
 /*!40000 ALTER TABLE `progresso_reproducao` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `resumo_favoritos_usuario`
+--
+
+DROP TABLE IF EXISTS `resumo_favoritos_usuario`;
+/*!50001 DROP VIEW IF EXISTS `resumo_favoritos_usuario`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `resumo_favoritos_usuario` (
+  `usunome` tinyint NOT NULL,
+  `epititulo` tinyint NOT NULL,
+  `podnome` tinyint NOT NULL,
+  `catnome` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `usuarios`
@@ -263,6 +318,44 @@ LOCK TABLES `usuarios` WRITE;
 INSERT INTO `usuarios` VALUES (1,'Gustavo','gustavo@gmail.com','123','admin'),(2,'Joao','joao@gmail.com','123','comum'),(3,'Jose','jose@gmail.com','123','comum'),(4,'Julia','julia@gmail.com','123','comum'),(5,'Josivaldo','josivaldo@gmail.com','123','comum'),(6,'Luisa','luisa@gmail.com','123','comum'),(7,'Alan','alan@gmail.com','123','comum'),(8,'Test User','test@example.com','password123','comum');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `progresso_por_episodio`
+--
+
+/*!50001 DROP TABLE IF EXISTS `progresso_por_episodio`*/;
+/*!50001 DROP VIEW IF EXISTS `progresso_por_episodio`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `progresso_por_episodio` AS select `usuarios`.`usunome` AS `usunome`,`episodios`.`epititulo` AS `epititulo`,`podcasts`.`podnome` AS `podnome`,`progresso_reproducao`.`proprogresso` AS `proprogresso`,`progresso_reproducao`.`prodata` AS `prodata` from (((`progresso_reproducao` join `usuarios` on(`progresso_reproducao`.`usucodigo` = `usuarios`.`usucodigo`)) join `episodios` on(`progresso_reproducao`.`epicodigo` = `episodios`.`epicodigo`)) join `podcasts` on(`episodios`.`podcodigo` = `podcasts`.`podcodigo`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `resumo_favoritos_usuario`
+--
+
+/*!50001 DROP TABLE IF EXISTS `resumo_favoritos_usuario`*/;
+/*!50001 DROP VIEW IF EXISTS `resumo_favoritos_usuario`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `resumo_favoritos_usuario` AS select `usuarios`.`usunome` AS `usunome`,`episodios`.`epititulo` AS `epititulo`,`podcasts`.`podnome` AS `podnome`,`categorias`.`catnome` AS `catnome` from ((((`favoritos` join `usuarios` on(`favoritos`.`usucodigo` = `usuarios`.`usucodigo`)) join `episodios` on(`favoritos`.`epicodigo` = `episodios`.`epicodigo`)) join `podcasts` on(`episodios`.`podcodigo` = `podcasts`.`podcodigo`)) join `categorias` on(`podcasts`.`catcodigo` = `categorias`.`catcodigo`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -273,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-22 17:35:23
+-- Dump completed on 2025-07-06 20:26:42
