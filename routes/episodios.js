@@ -22,7 +22,7 @@ const {
 router.get('/:podcodigo', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
     try {
-        const podcodigo = req.params.podcodigo;
+        const { podcodigo } = req.params;
         const episodios = await buscarEpisodiosPorPodcast(podcodigo);
         const podcast = await buscarPodcastPorId(podcodigo);
         res.render('episodios', {
@@ -46,8 +46,8 @@ router.get('/:podcodigo', async function (req, res, next) {
 
 router.get('/:podcodigo/:epicodigo', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
-    const podcodigo = req.params.podcodigo;
-    const epicodigo = req.params.epicodigo;
+    const { podcodigo } = req.params;
+    const { epicodigo } = req.params;
     try {
         const episodio = await buscarEpisodioPorId(epicodigo);
         if (!episodio) {
@@ -86,14 +86,14 @@ router.get('/:podcodigo/:epicodigo', async function (req, res, next) {
 router.post('/:podcodigo/:epicodigo/comentar', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
+        const { podcodigo } = req.params;
+        const { epicodigo } = req.params;
         const { comentario } = req.body;
         await inserirComentario({
             usucodigo: global.usuarioCodigo,
             epicodigo: parseInt(epicodigo),
-            texto: comentario,
-            data: new Date().toISOString().split('T')[0]
+            comtexto: comentario,
+            comdata: new Date().toISOString().split('T')[0]
         });
         res.redirect(`/episodios/${podcodigo}/${epicodigo}`);
     } catch (err) {
@@ -108,8 +108,8 @@ router.post('/:podcodigo/:epicodigo/avaliar', async function (req, res, next) {
     }
 
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
+        const { podcodigo } = req.params;
+        const { epicodigo } = req.params;
         const { nota } = req.body;
 
         // Validação básica da nota
@@ -145,8 +145,8 @@ router.post('/:podcodigo/:epicodigo/avaliar', async function (req, res, next) {
 router.post('/:podcodigo/:epicodigo/favoritar', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
+        const { podcodigo } = req.params;
+        const { epicodigo } = req.params;
         const isFavorito = await verificarFavorito(global.usuarioCodigo, epicodigo);
         if (isFavorito) {
             await removerFavorito(global.usuarioCodigo, epicodigo);
@@ -167,8 +167,8 @@ router.post('/:podcodigo/:epicodigo/favoritar', async function (req, res, next) 
 router.post('/:podcodigo/:epicodigo/progresso', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
+        const { podcodigo } = req.params;
+        const { epicodigo } = req.params;
         const { progresso_segundos } = req.body;
         const progressoExistente = await buscarProgressoPorUsuario(global.usuarioCodigo, epicodigo);
         if (progressoExistente) {
@@ -194,9 +194,9 @@ router.post('/:podcodigo/:epicodigo/progresso', async function (req, res, next) 
 });
 
 router.get('/:podcodigo/:epicodigo/audio', (req, res, next) => {
-    const podcodigo = req.params.podcodigo;
-    const epicodigo = req.params.epicodigo;
-
+    const { podcodigo } = req.params;
+    const { epicodigo } = req.params;
+    
     buscarEpisodioPorId(epicodigo)
         .then(episodio => {
             if (!episodio) {
