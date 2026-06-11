@@ -55,6 +55,10 @@ router.post('/:podcodigo/adicionar', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
     try {
         const podcodigo = req.params.podcodigo;
+        const podcast = await buscarPodcastPorId(podcodigo);
+        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+            return res.redirect('/meusPodcasts');
+        }
         const { epititulo, epidescricao, epiurl, epiduracao, epidata, epinumero, epireproducoes, epiaudio } = req.body;
         await inserirEpisodio({
             podcodigo: parseInt(podcodigo),
@@ -101,6 +105,10 @@ router.post('/:podcodigo/:epicodigo', async function (req, res, next) {
     try {
         const podcodigo = req.params.podcodigo;
         const epicodigo = req.params.epicodigo;
+        const podcast = await buscarPodcastPorId(podcodigo);
+        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+            return res.redirect(`/meusEpisodios/${podcodigo}`);
+        }
         const { epititulo, epidescricao, epiurl, epiduracao, epidata, epinumero, epireproducoes, epiaudio } = req.body;
         await atualizarEpisodio({
             epicodigo: parseInt(epicodigo),
@@ -126,6 +134,10 @@ router.post('/:podcodigo/:epicodigo/delete', async function (req, res, next) {
     try {
         const podcodigo = req.params.podcodigo;
         const epicodigo = req.params.epicodigo;
+        const podcast = await buscarPodcastPorId(podcodigo);
+        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+            return res.redirect(`/meusEpisodios/${podcodigo}`);
+        }
         await deletarEpisodio(epicodigo, podcodigo);
         res.redirect(`/meusEpisodios/${podcodigo}`);
     } catch (err) {
