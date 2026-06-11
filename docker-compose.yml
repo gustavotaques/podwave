@@ -2,6 +2,7 @@ services:
   db:
     image: mariadb:lts
     container_name: podwave-db
+    restart: unless-stopped
     ports:
       - "3307:3306"
     environment:
@@ -15,6 +16,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 12
+      start_period: 30s
 
 volumes:
   db_data:
