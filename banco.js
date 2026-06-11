@@ -1,18 +1,20 @@
 const mysql = require('mysql2/promise');
 
+const DB_CONFIG = {
+    host: process.env.DB_HOST || 'localhost',
+    port: Number(process.env.DB_PORT || 3307),
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'podwave',
+    charset: 'utf8mb4'
+};
+
 async function connectDB() {
     if (global.connection && global.connection.state !== 'disconnected') {
         return global.connection;
     }
 
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: '',
-        database: 'podwave',
-        charset: 'utf8mb4'
-    });
+    const connection = await mysql.createConnection(DB_CONFIG);
 
     console.log('Conectou ao MySQL!');
     global.connection = connection;
@@ -366,7 +368,10 @@ async function buscarProgressoPorUsuario(usucodigo, epicodigo) {
     return rows[0] || null;
 }
 
-connectDB();
+connectDB().catch((err) => {
+    console.error(`Não foi possível conectar ao banco em ${DB_CONFIG.host}:${DB_CONFIG.port} (${err.message}).`);
+    console.error('Verifique se o container está rodando: docker compose up -d');
+});
 
 module.exports = {
     buscarUsuario,
