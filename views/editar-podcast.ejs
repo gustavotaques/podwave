@@ -1,44 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <%- include('partials/head', { pageTitle: typeof title !== 'undefined' ? title : 'PodWave — Editar podcast' }) %>
 </head>
-<body class="bg-gray-100">
-  <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-4">Editar Podcast</h1>
-    <% if (query.error) { %>
-      <p class="text-red-500 mb-4"><%= query.error %></p>
-    <% } %>
-    <form action="/meusPodcasts/editar/<%= podcast.podcodigo %>" method="POST" class="max-w-md">
-      <input type="hidden" name="podcodigo" value="<%= podcast.podcodigo %>">
-      <div class="mb-4">
-        <label for="podnome" class="block text-sm font-medium">Nome</label>
-        <input type="text" id="podnome" name="podnome" value="<%= podcast.podnome %>" required class="w-full p-2 border rounded">
-      </div>
-      <div class="mb-4">
-        <label for="poddescricao" class="block text-sm font-medium">Descrição</label>
-        <textarea id="poddescricao" name="poddescricao" class="w-full p-2 border rounded"><%= podcast.poddescricao %></textarea>
-      </div>
-      <div class="mb-4">
-        <label for="podurl" class="block text-sm font-medium">URL</label>
-        <input type="text" id="podurl" name="podurl" value="<%= podcast.podurl %>" class="w-full p-2 border rounded">
-      </div>
-      <div class="mb-4">
-        <label for="catcodigo" class="block text-sm font-medium">Categoria</label>
-        <select id="catcodigo" name="catcodigo" class="w-full p-2 border rounded">
-          <% categorias.forEach(categoria => { %>
-            <option value="<%= categoria.catcodigo %>" <%= podcast.catcodigo === categoria.catcodigo ? 'selected' : '' %>>
-              <%= categoria.catnome %>
-            </option>
-          <% }) %>
-        </select>
-      </div>
-      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Salvar</button>
-      <a href="/meusPodcasts" class="ml-2 text-blue-500">Cancelar</a>
-    </form>
-  </div>
+
+<body>
+  <%- include('partials/header') %>
+
+  <main class="mx-auto max-w-lg px-6 py-16">
+    <a href="/meusPodcasts"
+      class="rise inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-sage transition-colors hover:text-acid">
+      ← Voltar para meus podcasts
+    </a>
+
+    <div class="rise d1 mt-8 rounded-[2rem] border border-edge bg-panel p-8 sm:p-10">
+      <p class="kicker">Ajustes no programa</p>
+      <h1 class="mt-3 font-display text-3xl font-bold tracking-tight">Editar podcast</h1>
+
+      <% if (query.error) { %>
+        <div class="mt-6 flex items-center gap-3 rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-300">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-5 shrink-0">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+          </svg>
+          <%= query.error %>
+        </div>
+      <% } %>
+
+      <form action="/meusPodcasts/editar/<%= podcast.podcodigo %>" method="POST" class="mt-8 space-y-6">
+        <input type="hidden" name="podcodigo" value="<%= podcast.podcodigo %>">
+        <div>
+          <label for="podnome" class="kicker block">Nome</label>
+          <input type="text" id="podnome" name="podnome" value="<%= podcast.podnome %>" required class="field mt-2">
+        </div>
+        <div>
+          <label for="poddescricao" class="kicker block">Descrição</label>
+          <textarea id="poddescricao" name="poddescricao" rows="3"
+            class="field mt-2 resize-y"><%= podcast.poddescricao %></textarea>
+        </div>
+        <div>
+          <label for="podurl" class="kicker block">URL da capa</label>
+          <input type="text" id="podurl" name="podurl" value="<%= podcast.podurl %>" class="field mt-2">
+        </div>
+        <div>
+          <label for="catcodigo" class="kicker block">Categoria</label>
+          <select id="catcodigo" name="catcodigo" class="field mt-2">
+            <% categorias.forEach(categoria => { %>
+              <option value="<%= categoria.catcodigo %>" <%= podcast.catcodigo === categoria.catcodigo ? 'selected' : '' %>>
+                <%= categoria.catnome %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="flex items-center gap-4 pt-2">
+          <button type="submit" class="btn-acid flex-1">Salvar</button>
+          <a href="/meusPodcasts" class="btn-ghost">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </main>
 </body>
+
 </html>

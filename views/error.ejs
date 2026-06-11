@@ -1,3 +1,36 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <%- include('partials/head', { pageTitle: 'PodWave — Fora do ar' }) %>
+</head>
+
+<body>
+  <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    <p class="kicker rise flex items-center gap-2">
+      <span class="inline-block size-2 rounded-full bg-red-400"></span>
+      Transmissão interrompida
+    </p>
+    <h1 class="rise d1 mt-6 font-display text-7xl font-bold tracking-tight text-acid sm:text-9xl">
+      <%= error.status || 500 %>
+    </h1>
+    <h2 class="rise d2 mt-4 font-display text-2xl font-semibold sm:text-3xl">
+      O sinal caiu por aqui.
+    </h2>
+    <p class="rise d3 mt-3 max-w-md text-sage">
+      <%= message %>
+    </p>
+    <a href="/" class="btn-acid rise d4 mt-10">Voltar ao início</a>
+
+    <% if (error.stack) { %>
+      <details class="rise d5 mt-12 w-full max-w-2xl text-left">
+        <summary class="font-mono text-[11px] uppercase tracking-[0.18em] text-sage transition-colors hover:text-acid">
+          Detalhes técnicos
+        </summary>
+        <pre class="mt-4 overflow-x-auto rounded-2xl border border-edge bg-panel p-6 font-mono text-xs leading-relaxed text-sage"><%= error.stack %></pre>
+      </details>
+    <% } %>
+  </main>
+</body>
+
+</html>
