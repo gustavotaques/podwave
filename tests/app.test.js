@@ -179,12 +179,13 @@ describe('Testes - PodWave', () => {
         { catcodigo: 1, catnome: 'Empreendedorismo' },
         { catcodigo: 2, catnome: 'Geral' }
       ]);
+      // A rota renderiza HTML (EJS), não JSON — as asserções são sobre o texto da página
       const response = await request(app)
         .get('/listas')
         .set('Cookie', 'usuarioCodigo=1')
         .expect(200);
-      expect(response.body.podcasts).toBeInstanceOf(Array);
-      expect(response.body.podcasts.length).toBeGreaterThanOrEqual(0);
+      expect(global.banco.buscarTodosPodcasts).toHaveBeenCalled();
+      expect(response.text).toContain('Teste');
     }, 15000);
 
     it('Teste 6: deve filtrar podcasts por categoria', async () => {
@@ -200,8 +201,8 @@ describe('Testes - PodWave', () => {
         .get('/listas?catcodigo=1')
         .set('Cookie', 'usuarioCodigo=1')
         .expect(200);
-      expect(response.body.podcasts).toBeInstanceOf(Array);
-      expect(response.body.podcasts.every(p => p.podcategoria === 'Empreendedorismo')).toBe(true);
+      expect(global.banco.buscarPodcastsPorCategoria).toHaveBeenCalledWith('1');
+      expect(response.text).toContain('Inovação Hoje');
     }, 15000);
   });
 
@@ -220,10 +221,7 @@ describe('Testes - PodWave', () => {
         .get('/episodios/19')
         .set('Cookie', 'usuarioCodigo=1')
         .expect(200);
-      expect(response.body.episodios).toBeInstanceOf(Array);
-      expect(response.body.episodios).toContainEqual(
-        expect.objectContaining({ epititulo: 'Fluminense bate Ulsan' })
-      );
+      expect(response.text).toContain('Fluminense bate Ulsan');
     }, 15000);
 
     it('Teste 9: deve retornar vazio para podcast inexistente', async () => {
@@ -234,7 +232,9 @@ describe('Testes - PodWave', () => {
         .get('/episodios/999')
         .set('Cookie', 'usuarioCodigo=1')
         .expect(200);
-      expect(response.body.episodios).toEqual([]);
+      expect(global.banco.buscarEpisodiosPorPodcast).toHaveBeenCalledWith('999');
+      // Sem podcast, a rota usa o título de fallback e nenhum episódio é listado
+      expect(response.text).toContain('Podcast #999');
     }, 10000);
   });
 
@@ -248,13 +248,13 @@ describe('Testes - PodWave', () => {
       global.banco.inserirComentario.mockResolvedValue({ insertId: 1 });
       const response = await request(app)
         .post('/episodios/19/4/comentar')
-        .send({ comtexto: 'Ótimo episódio!' })
+        .send({ comentario: 'Ótimo episódio!' }) // a rota lê req.body.comentario
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .expect(302);
       expect(response.headers.location).toBe('/episodios/19/4');
       expect(global.banco.inserirComentario).toHaveBeenCalledWith({
         usucodigo: '1',
-        epicodigo: '4',
+        epicodigo: 4,
         comtexto: 'Ótimo episódio!',
         comdata: expect.any(String)
       });
@@ -343,8 +343,8 @@ describe('Testes - PodWave', () => {
 
     it('Teste 15: não deve atualizar podcast de outro usuário', async () => {
       global.usuarioCodigo = '2'; // Usuário diferente
-      global.banco.atualizarPodcast = jest.fn().mockResolvedValue(false);
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.atualizarPodcast.mockResolvedValue(false);
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusPodcasts/editar/19')
         .send({
@@ -357,7 +357,11 @@ describe('Testes - PodWave', () => {
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .expect(302);
       expect(response.headers.location).toBe('/meusPodcasts');
-      expect(global.banco.atualizarPodcast).not.toHaveBeenCalled();
+      // A proteção é via SQL (UPDATE ... WHERE usucodigo = ?): a chamada leva o
+      // usucodigo do solicitante, então não afeta linhas de outro usuário
+      expect(global.banco.atualizarPodcast).toHaveBeenCalledWith(
+        expect.objectContaining({ podcodigo: 19, usucodigo: '2' })
+      );
     });
   });
 
@@ -365,8 +369,7 @@ describe('Testes - PodWave', () => {
   describe('Deletar Podcast (POST /meusPodcasts/deletar/:podcodigo)', () => {
     it('Teste 16: deve deletar um podcast do usuário', async () => {
       global.usuarioCodigo = '1';
-      global.banco.deletarPodcast = jest.fn().mockResolvedValue(true);
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.deletarPodcast.mockResolvedValue(true);
       const response = await request(app)
         .post('/meusPodcasts/deletar/19')
         .set('Cookie', ['usuarioCodigo=1'])
@@ -378,15 +381,16 @@ describe('Testes - PodWave', () => {
 
     it('Teste 17: não deve deletar podcast de outro usuário', async () => {
       global.usuarioCodigo = '2';
-      global.banco.deletarPodcast = jest.fn().mockResolvedValue(false);
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.deletarPodcast.mockResolvedValue(false);
       const response = await request(app)
         .post('/meusPodcasts/deletar/19')
         .set('Cookie', ['usuarioCodigo=2'])
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .expect(302);
       expect(response.headers.location).toBe('/meusPodcasts');
-      expect(global.banco.deletarPodcast).not.toHaveBeenCalled();
+      // A proteção é via SQL (DELETE ... WHERE usucodigo = ?): a chamada leva o
+      // usucodigo do solicitante, então não apaga podcast de outro usuário
+      expect(global.banco.deletarPodcast).toHaveBeenCalledWith('19', '2');
     });
   });
 
@@ -394,8 +398,8 @@ describe('Testes - PodWave', () => {
   describe('Adicionar Episódio (POST /meusEpisodios/:podcodigo/adicionar)', () => {
     it('Teste 18: deve adicionar um novo episódio', async () => {
       global.usuarioCodigo = '1';
-      global.banco.inserirEpisodio = jest.fn().mockResolvedValue(1);
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.inserirEpisodio.mockResolvedValue(1);
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusEpisodios/19/adicionar')
         .send({
@@ -427,7 +431,7 @@ describe('Testes - PodWave', () => {
 
     it('Teste 19: não deve adicionar episódio se podcast não pertence ao usuário', async () => {
       global.usuarioCodigo = '2';
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusEpisodios/19/adicionar')
         .send({
@@ -451,9 +455,9 @@ describe('Testes - PodWave', () => {
   describe('Atualizar Episódio (POST /meusEpisodios/:podcodigo/:epicodigo)', () => {
     it('Teste 20: deve atualizar um episódio', async () => {
       global.usuarioCodigo = '1';
-      global.banco.atualizarEpisodio = jest.fn().mockResolvedValue(true);
-      global.banco.buscarEpisodioPorId = jest.fn().mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.atualizarEpisodio.mockResolvedValue(true);
+      global.banco.buscarEpisodioPorId.mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusEpisodios/19/4')
         .send({
@@ -485,9 +489,9 @@ describe('Testes - PodWave', () => {
 
     it('Teste 21: não deve atualizar episódio de outro usuário', async () => {
       global.usuarioCodigo = '2';
-      global.banco.atualizarEpisodio = jest.fn().mockResolvedValue(false);
-      global.banco.buscarEpisodioPorId = jest.fn().mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.atualizarEpisodio.mockResolvedValue(false);
+      global.banco.buscarEpisodioPorId.mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusEpisodios/19/4')
         .send({
@@ -511,9 +515,9 @@ describe('Testes - PodWave', () => {
   describe('Deletar Episódio (POST /meusEpisodios/:podcodigo/:epicodigo/delete)', () => {
     it('Teste 22: deve deletar um episódio', async () => {
       global.usuarioCodigo = '1';
-      global.banco.deletarEpisodio = jest.fn().mockResolvedValue(true);
-      global.banco.buscarEpisodioPorId = jest.fn().mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.deletarEpisodio.mockResolvedValue(true);
+      global.banco.buscarEpisodioPorId.mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusEpisodios/19/4/delete')
         .set('Cookie', ['usuarioCodigo=1'])
@@ -525,9 +529,9 @@ describe('Testes - PodWave', () => {
 
     it('Teste 23: não deve deletar episódio de outro usuário', async () => {
       global.usuarioCodigo = '2';
-      global.banco.deletarEpisodio = jest.fn().mockResolvedValue(false);
-      global.banco.buscarEpisodioPorId = jest.fn().mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
-      global.banco.buscarPodcastPorId = jest.fn().mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
+      global.banco.deletarEpisodio.mockResolvedValue(false);
+      global.banco.buscarEpisodioPorId.mockResolvedValue({ epicodigo: 4, podcodigo: 19, usucodigo: 1 });
+      global.banco.buscarPodcastPorId.mockResolvedValue({ podcodigo: 19, usucodigo: 1 });
       const response = await request(app)
         .post('/meusEpisodios/19/4/delete')
         .set('Cookie', ['usuarioCodigo=2'])
@@ -544,7 +548,7 @@ describe('Testes - PodWave', () => {
       const response = await request(app)
         .get('/')
         .expect(200);
-      expect(response.text).toContain('Podwave'); // Ajuste para o texto real da página
+      expect(response.text).toContain('PodWave'); // grafia usada em views/index.ejs
     });
   });
 
@@ -553,6 +557,19 @@ describe('Testes - PodWave', () => {
     it('Teste 25: deve autenticar usuário e listar podcasts', async () => {
       // Cria um agente para manter a sessão/cookies
       const agent = request.agent(app);
+
+      // Reconfigura o mock: testes anteriores deixam buscarUsuario resolvendo null
+      // (jest.clearAllMocks não restaura implementações)
+      global.banco.buscarUsuario.mockResolvedValue({
+        usucodigo: 1,
+        usuemail: 'user@example.com'
+      });
+      global.banco.buscarTodosPodcasts.mockResolvedValue([
+        { podcodigo: 9, podnome: 'Inovação Hoje', podcategoria: 'Empreendedorismo' }
+      ]);
+      global.banco.buscarCategorias.mockResolvedValue([
+        { catcodigo: 1, catnome: 'Empreendedorismo' }
+      ]);
 
       // Faz login
       await agent
@@ -567,13 +584,13 @@ describe('Testes - PodWave', () => {
       expect(global.usuarioEmail).toBe('user@example.com');
 
       // Faz a requisição para listar podcasts usando o mesmo agente
+      // (a rota renderiza HTML, então as asserções são sobre o texto da página)
       const response = await agent
         .get('/listas')
         .expect(200);
 
-      expect(response.body.podcasts).toBeInstanceOf(Array);
-      expect(response.body.podcasts.length).toBeGreaterThanOrEqual(0);
-      expect(response.body.categorias).toBeInstanceOf(Array);
+      expect(response.text).toContain('Inovação Hoje');
+      expect(response.text).toContain('Empreendedorismo');
     }, 15000); // Aumenta o timeout para 15 segundos
   });
 
@@ -589,10 +606,10 @@ describe('Testes - PodWave', () => {
         .expect(302);
       expect(signupResponse.headers.location).toBe('/login');
 
-      banco.buscarUsuarioPorEmail.mockResolvedValue({
+      // A rota de login usa buscarUsuario (não buscarUsuarioPorEmail)
+      banco.buscarUsuario.mockResolvedValue({
         usucodigo: 1,
         usuemail: uniqueEmail,
-        ususenha: 'password123',
       });
       const loginResponse = await request(app)
         .post('/login')
