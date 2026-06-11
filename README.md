@@ -52,6 +52,10 @@ O banco fica disponível em `localhost:3307`.
 > Para configurar a conexão (host, porta, usuário...), copie `.env.example`
 > para `.env` e ajuste — os padrões já apontam para o container.
 
+4. Inicie a aplicação (veja **Como Executar** abaixo):
+
+`npm start`
+
 ## Como Executar
 
 Inicie o servidor Node.js com:
