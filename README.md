@@ -1,85 +1,78 @@
-# PodWave - Plataforma de Podcasts
+# PodWave — Plataforma de Podcasts
 
-![Node.js](https://img.shields.io/badge/Node.js-22%2B-green)  
+![Node.js](https://img.shields.io/badge/Node.js-22%2B-green) ![Express](https://img.shields.io/badge/Express-4-black) ![MariaDB](https://img.shields.io/badge/MariaDB-Docker-blue)
 
-![Docker](https://img.shields.io/badge/Docker-Compose-blue)
-
-Integrantes:
-
-Gustavo Vinicius Taques
-
-## Sobre o Podwave
-
-O **Podwave** é uma plataforma web para explorar e descobrir podcasts, com backend Node.js, banco de dados MySQL/MariaDB e interface responsiva estilizada com Tailwind CSS.
+O **PodWave** é uma plataforma web para explorar, ouvir e interagir com podcasts. Backend em Node.js/Express, banco MariaDB em Docker e interface responsiva com Tailwind CSS.
 
 ## Funcionalidades
-- Exploração de podcasts em grid responsivo (1 coluna em telas pequenas, 2 em telas médias, 3 em telas grandes).
-- Menu de usuário com opções de perfil, gerenciamento de podcasts e logout.
-- Design responsivo para dispositivos móveis, tablets e desktops.
-- Navegação com links para "Sobre Nós", "Fale Conosco" e "Nossos Podcasts".
-- Integração com redes sociais (Facebook, X, LinkedIn, YouTube).
-- Listagem dinâmica de podcasts do banco de dados MySQL/MariaDB (Docker).
-- Autenticação de usuário com login e redirecionamento.
-- Gerenciamento de favoritos, avaliações, comentários e progresso de reprodução.
 
-## Pré-requisitos
+- Exploração de podcasts com filtro por categoria
+- Reprodução de episódios com streaming de áudio e salvamento de progresso
+- Cadastro e login de usuários
+- Gerenciamento dos próprios podcasts e episódios (criar, editar, excluir), com verificação de dono
+- Comentários, avaliações (1 a 5) e favoritos por episódio
+- Interface responsiva para celular, tablet e desktop
 
-- Node.js versão 22.9 ou superior (o script de start usa a flag --env-file-if-exists)
-- Docker com Docker Compose (no Windows, Docker Desktop com integração WSL ativada)
-- Git instalado na máquina
+## Stack
 
-## Instalação
+| Camada | Tecnologia |
+|---|---|
+| Backend | Node.js 22, Express 4 |
+| Views | EJS + Tailwind CSS |
+| Banco de dados | MariaDB (Docker), driver mysql2 |
+| Testes | Jest + Supertest |
 
-1. Clone o repositório do projeto:
+## Como rodar
+
+Pré-requisitos: **Node.js 22.9+** (o start usa a flag `--env-file-if-exists`), **Docker com Docker Compose** (no Windows, Docker Desktop com integração WSL ativada) e **Git**.
 
 ```bash
-git clone https://github.com/seu-usuario/podwave.git
+# 1. Clone o repositório
+git clone https://github.com/gustavotaques/podwave.git
 cd podwave
+
+# 2. Instale as dependências
+npm install
+
+# 3. Suba o banco de dados (MariaDB em Docker)
+docker compose up -d
+
+# 4. Inicie a aplicação
+npm start
 ```
 
-2. Instale todas as dependências do projeto:
+Acesse em **http://localhost:3000**.
 
-`npm install`
+> Para sobrescrever a configuração de conexão (host, porta, usuário...), copie
+> `.env.example` para `.env` e ajuste — os padrões já apontam para o container.
 
-3. Suba o banco de dados (MariaDB em Docker):
+## Banco de dados
 
-`docker compose up -d`
+Na primeira subida, o container `podwave-db` cria o banco `podwave` e importa automaticamente o `podwavebackupfinal.sql` (schema + dados de teste). O banco fica em `localhost:3307` — porta 3307 porque a 3306 costuma estar ocupada por uma instalação local de MySQL no Windows.
 
-Na primeira execução o container cria o banco `podwave` e importa
-automaticamente o `podwavebackupfinal.sql` (schema + dados de teste).
-O banco fica disponível em `localhost:3307`.
+Os dados persistem em um volume Docker entre reinicializações. Para **resetar o banco** (apagar tudo e reimportar o dump):
 
-> Para configurar a conexão (host, porta, usuário...), copie `.env.example`
-> para `.env` e ajuste — os padrões já apontam para o container.
+```bash
+docker compose down -v && docker compose up -d
+```
 
-4. Inicie a aplicação (veja **Como Executar** abaixo):
+## Credenciais para teste
 
-`npm start`
+| Perfil | E-mail | Senha |
+|---|---|---|
+| Administrador | gustavo@gmail.com | 123 |
+| Usuário comum | joao@gmail.com | 123 |
 
-## Como Executar
+## Testes
 
-Inicie o servidor Node.js com:
+```bash
+npm test
+```
 
-`npm start`
+A suíte (Jest + Supertest) cobre cadastro, login, exploração, comentários e o CRUD de podcasts/episódios com regras de autorização. O relatório HTML é gerado em `relatorio-testes/teste.html`. Para cobertura: `npm run coverage`.
 
-Acesse a aplicação no navegador através de:
+## Licença e autor
 
-http://localhost:3000
+Projeto acadêmico sob licença MIT.
 
-## Credenciais para Teste
-
-**Acesso Administrativo:**  
-
-Email: gustavo@gmail.com  
-
-Senha: 123
-
-**Usuário Comum:**  
-
-Email: joao@gmail.com  
-
-Senha: 123
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT - consulte o arquivo LICENSE para obter detalhes.
+Desenvolvido por **Gustavo Vinicius Taques**.
