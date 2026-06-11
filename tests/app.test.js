@@ -254,6 +254,7 @@ describe('Testes - PodWave', () => {
       expect(response.headers.location).toBe('/episodios/19/4');
       expect(global.banco.inserirComentario).toHaveBeenCalledWith({
         usucodigo: '1',
+        podcodigo: 19,
         epicodigo: 4,
         comtexto: 'Ótimo episódio!',
         comdata: expect.any(String)

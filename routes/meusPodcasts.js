@@ -89,10 +89,10 @@ router.post('/adicionar', async function(req, res, next) {
 });
 
 // Atualizar usando POST /editar/:podcodigo
-router.post('/editar/:podcodigo', async function(req, res, next) { 
+router.post('/editar/:podcodigo', async function(req, res, next) {
   if (!global.usuarioCodigo) return res.redirect('/login');
+  const podcodigo = req.params.podcodigo;
   try {
-    const podcodigo = req.params.podcodigo;
     const { podnome, poddescricao, podurl, catcodigo } = req.body;
     await atualizarPodcast({
       podcodigo: parseInt(podcodigo),

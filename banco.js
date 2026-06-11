@@ -255,12 +255,13 @@ async function buscarEpisodioPorId(epicodigo) {
 // Comentários
 async function inserirComentario(comentario) {
     const conn = await connectDB();
-    const sql = 'INSERT INTO comentarios (usucodigo, epicodigo, comtexto, comdata) VALUES (?, ?, ?, ?)';
+    const sql = 'INSERT INTO comentarios (usucodigo, podcodigo, epicodigo, comtexto, comdata) VALUES (?, ?, ?, ?, ?)';
     const [result] = await conn.query(sql, [
         comentario.usucodigo,
+        comentario.podcodigo,
         comentario.epicodigo,
-        comentario.texto,
-        comentario.data
+        comentario.comtexto,
+        comentario.comdata
     ]);
     return result.insertId;
 }
@@ -280,9 +281,10 @@ async function buscarComentariosPorEpisodio(epicodigo) {
 // Avaliações
 async function inserirAvaliacao(avaliacao) {
     const conn = await connectDB();
-    const sql = 'INSERT INTO avaliacoes (usucodigo, epicodigo, avanota, avacomentario, avadata) VALUES (?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO avaliacoes (usucodigo, podcodigo, epicodigo, avanota, avacomentario, avadata) VALUES (?, ?, ?, ?, ?, ?)';
     const [result] = await conn.query(sql, [
         avaliacao.usucodigo,
+        avaliacao.podcodigo,
         avaliacao.epicodigo,
         avaliacao.nota,
         avaliacao.comentario || null,  // Opcional, usa NULL se não fornecido
@@ -314,11 +316,11 @@ async function buscarAvaliacaoPorUsuario(usucodigo, epicodigo) {
 // Favoritos
 async function inserirFavorito(favorito) {
     const conn = await connectDB();
-    const sql = 'INSERT INTO favoritos (usucodigo, epicodigo, data) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO favoritos (usucodigo, podcodigo, epicodigo) VALUES (?, ?, ?)';
     const [result] = await conn.query(sql, [
         favorito.usucodigo,
-        favorito.epicodigo,
-        favorito.data || new Date().toISOString().split('T')[0]  // Valor padrão se não fornecido
+        favorito.podcodigo,
+        favorito.epicodigo
     ]);
     return result.insertId;
 }

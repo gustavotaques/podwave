@@ -33,8 +33,8 @@ router.get('/:podcodigo', async function (req, res, next) {
 
 router.get('/:podcodigo/adicionar', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
+    const podcodigo = req.params.podcodigo;
     try {
-        const podcodigo = req.params.podcodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
         if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect('/meusPodcasts');
@@ -53,8 +53,8 @@ router.get('/:podcodigo/adicionar', async function (req, res, next) {
 
 router.post('/:podcodigo/adicionar', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
+    const podcodigo = req.params.podcodigo;
     try {
-        const podcodigo = req.params.podcodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
         if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect('/meusPodcasts');
@@ -103,9 +103,9 @@ router.get('/:podcodigo/:epicodigo/editar', async function (req, res, next) {
 
 router.post('/:podcodigo/:epicodigo', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
+    const podcodigo = req.params.podcodigo;
+    const epicodigo = req.params.epicodigo;
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
         if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect(`/meusEpisodios/${podcodigo}`);
@@ -132,9 +132,9 @@ router.post('/:podcodigo/:epicodigo', async function (req, res, next) {
 
 router.post('/:podcodigo/:epicodigo/delete', async function (req, res, next) {
     if (!global.usuarioCodigo) return res.redirect('/login');
+    const podcodigo = req.params.podcodigo;
+    const epicodigo = req.params.epicodigo;
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
         if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect(`/meusEpisodios/${podcodigo}`);
