@@ -10,14 +10,16 @@ const DB_CONFIG = {
 };
 
 async function connectDB() {
-    if (global.connection && global.connection.state !== 'disconnected') {
-        return global.connection;
+    // Pool em vez de conexão única: conexões derrubadas pelo servidor
+    // (wait_timeout, restart do container) são descartadas e recriadas
+    // automaticamente, em vez de ficarem mortas no cache.
+    if (!global.connection) {
+        global.connection = mysql.createPool({
+            ...DB_CONFIG,
+            waitForConnections: true,
+            connectionLimit: 10
+        });
     }
-
-    const connection = await mysql.createConnection(DB_CONFIG);
-
-    console.log('Conectou ao MySQL!');
-    global.connection = connection;
     return global.connection;
 }
 
@@ -368,10 +370,13 @@ async function buscarProgressoPorUsuario(usucodigo, epicodigo) {
     return rows[0] || null;
 }
 
-connectDB().catch((err) => {
-    console.error(`Não foi possível conectar ao banco em ${DB_CONFIG.host}:${DB_CONFIG.port} (${err.message}).`);
-    console.error('Verifique se o container está rodando: docker compose up -d');
-});
+connectDB()
+    .then((pool) => pool.query('SELECT 1'))
+    .then(() => console.log('Conectou ao MySQL!'))
+    .catch((err) => {
+        console.error(`Não foi possível conectar ao banco em ${DB_CONFIG.host}:${DB_CONFIG.port} (${err.message}).`);
+        console.error('Verifique se o container está rodando: docker compose up -d');
+    });
 
 module.exports = {
     buscarUsuario,
