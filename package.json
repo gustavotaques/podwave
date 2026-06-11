@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodemon -- --env-file-if-exists=.env ./bin/www",
     "test": "jest --passWithNoTests --detectOpenHandles",
     "coverage": "jest --coverage"
   },
