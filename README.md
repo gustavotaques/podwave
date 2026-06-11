@@ -1,6 +1,6 @@
 # PodWave - Plataforma de Podcasts
 
-![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)  
+![Node.js](https://img.shields.io/badge/Node.js-22%2B-green)  
 
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
 
@@ -24,7 +24,7 @@ O **Podwave** é uma plataforma web para explorar e descobrir podcasts, com back
 
 ## Pré-requisitos
 
-- Node.js versão 18 ou superior
+- Node.js versão 22.9 ou superior (o script de start usa a flag --env-file-if-exists)
 - Docker com Docker Compose (no Windows, Docker Desktop com integração WSL ativada)
 - Git instalado na máquina
 
