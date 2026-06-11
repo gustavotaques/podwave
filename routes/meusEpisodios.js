@@ -14,7 +14,7 @@ router.get('/:podcodigo', async function (req, res, next) {
     try {
         const podcodigo = req.params.podcodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || podcast.usucodigo !== global.usuarioCodigo) {
+        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect('/meusPodcasts?error=Podcast não encontrado ou não pertence ao usuário');
         }
         const episodios = await buscarEpisodiosPorPodcast(podcodigo);
@@ -36,7 +36,7 @@ router.get('/:podcodigo/adicionar', async function (req, res, next) {
     try {
         const podcodigo = req.params.podcodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || podcast.usucodigo !== global.usuarioCodigo) {
+        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect('/meusPodcasts');
         }
         res.render('adicionar-episodio', {
@@ -85,7 +85,8 @@ router.get('/:podcodigo/:epicodigo/editar', async function (req, res, next) {
         const podcodigo = req.params.podcodigo;
         const epicodigo = req.params.epicodigo;
         const episodio = await buscarEpisodioPorId(epicodigo);
-        if (!episodio || episodio.podcodigo !== parseInt(podcodigo) || !await buscarPodcastPorId(podcodigo) || (await buscarPodcastPorId(podcodigo)).usucodigo !== global.usuarioCodigo) {
+        const podcast = await buscarPodcastPorId(podcodigo);
+        if (!episodio || episodio.podcodigo !== parseInt(podcodigo) || !podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
             return res.redirect(`/meusEpisodios/${podcodigo}`);
         }
         res.render('editar-episodio', {

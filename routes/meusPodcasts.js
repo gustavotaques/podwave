@@ -37,7 +37,7 @@ router.get('/editar/:podcodigo', async function(req, res, next) {
   if (!global.usuarioCodigo) return res.redirect('/login');
   try {
     const podcast = await buscarPodcastPorId(req.params.podcodigo);
-    if (!podcast || podcast.usucodigo !== global.usuarioCodigo) {
+    if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
         return res.redirect('/meusPodcasts');
     }
     const categorias = await buscarCategorias();
