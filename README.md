@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)  
 
-![XAMPP](https://img.shields.io/badge/XAMPP-Compatible-orange)
+![Docker](https://img.shields.io/badge/Docker-Compose-blue)
 
 Integrantes:
 
@@ -18,60 +18,39 @@ O **Podwave** é uma plataforma web para explorar e descobrir podcasts, com back
 - Design responsivo para dispositivos móveis, tablets e desktops.
 - Navegação com links para "Sobre Nós", "Fale Conosco" e "Nossos Podcasts".
 - Integração com redes sociais (Facebook, X, LinkedIn, YouTube).
-- Listagem dinâmica de podcasts do banco de dados MySQL/MariaDB (XAMPP).
+- Listagem dinâmica de podcasts do banco de dados MySQL/MariaDB (Docker).
 - Autenticação de usuário com login e redirecionamento.
 - Gerenciamento de favoritos, avaliações, comentários e progresso de reprodução.
 
 ## Pré-requisitos
 
 - Node.js versão 18 ou superior
-
-- XAMPP com módulo MySQL ativo
-
+- Docker com Docker Compose (no Windows, Docker Desktop com integração WSL ativada)
 - Git instalado na máquina
 
 ## Instalação
 
-1\. Clone o repositório do projeto:
+1. Clone o repositório do projeto:
 
 ```bash
-git clone https://github.com/seu-usuario/podwave.git  
+git clone https://github.com/seu-usuario/podwave.git
 cd podwave
 ```
 
-2\. Instale todas as dependências do projeto:
+2. Instale todas as dependências do projeto:
 
 `npm install`
 
-3\. Configure o ambiente:
+3. Suba o banco de dados (MariaDB em Docker):
 
-- Vá até a pasta onde está instalado o XAMPP e cole o arquivo `podwavebackup.sql`
+`docker compose up -d`
 
-- Inicie o serviço MySQL através do XAMPP Control Panel
+Na primeira execução o container cria o banco `podwave` e importa
+automaticamente o `podwavebackupfinal.sql` (schema + dados de teste).
+O banco fica disponível em `localhost:3307`.
 
-- Clique em "Shell"
-
-- No shell aberto, execute:
-
-````
-mysql -u root
-````
-- Após inicializar o banco de dados crie o banco `podwave`:
-
-````
-CREATE DATABASE podwave;
-````
-
-- Saia do banco digitando o comando:
-````
-quit
-````
-
-- Ainda no shell do XAMPP digite o comando abaixo para importar os dados do arquivo `podwavebackup.sql`:
-
-````
-mysql -u root podwave < podwavebackup.sql
-````
+> Para configurar a conexão (host, porta, usuário...), copie `.env.example`
+> para `.env` e ajuste — os padrões já apontam para o container.
 
 ## Como Executar
 
