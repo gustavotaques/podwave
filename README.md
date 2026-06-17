@@ -22,6 +22,22 @@ O **PodWave** é uma plataforma web para explorar, ouvir e interagir com podcast
 | Banco de dados | MariaDB (Docker), driver mysql2 |
 | Testes | Jest + Supertest |
 
+## Estrutura do projeto
+
+```
+src/
+├── app.js           # montagem do Express (middlewares, rotas, erros)
+├── server.js        # entry point: sobe o servidor
+├── config/          # pool de conexão com o banco
+├── middlewares/     # requireLogin (autenticação via sessão)
+├── routes/          # mapeiam URL → controller
+├── controllers/     # req/res, validação, render
+├── repositories/    # SQL, um arquivo por entidade
+└── views/           # templates EJS
+public/              # assets estáticos (imagens, áudios, CSS)
+tests/               # testes unitários (mocks) e de integração (banco real)
+```
+
 ## Como rodar
 
 Pré-requisitos: **Node.js 22.9+** (o start usa a flag `--env-file-if-exists`), **Docker com Docker Compose** (no Windows, Docker Desktop com integração WSL ativada) e **Git**.
@@ -69,7 +85,7 @@ docker compose down -v && docker compose up -d
 npm test
 ```
 
-A suíte (Jest + Supertest) cobre cadastro, login, exploração, comentários e o CRUD de podcasts/episódios com regras de autorização. O relatório HTML é gerado em `relatorio-testes/teste.html`. Para cobertura: `npm run coverage`.
+A suíte (Jest + Supertest) cobre cadastro, login/logout com sessão, exploração, comentários e o CRUD de podcasts/episódios com regras de autorização — 26 testes unitários (repositories mockados) e 21 de integração contra o banco real (exigem `docker compose up -d`). O relatório HTML é gerado em `relatorio-testes/teste.html`. Para cobertura: `npm run coverage`.
 
 ## Licença e autor
 

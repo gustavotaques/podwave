@@ -1,68 +1,66 @@
-var express = require('express');
-var router = express.Router();
-const {
-    buscarPodcastPorId,
-    buscarEpisodiosPorPodcast,
+import {
     inserirEpisodio,
     atualizarEpisodio,
     deletarEpisodio,
-    buscarEpisodioPorId
-} = require('../banco');
+    buscarEpisodioPorId,
+    buscarEpisodiosPorPodcast
+} from '../repositories/episodios.repository.js';
+import { buscarPodcastPorId } from '../repositories/podcasts.repository.js';
 
-router.get('/:podcodigo', async function (req, res, next) {
-    if (!global.usuarioCodigo) return res.redirect('/login');
+export async function listarMeusEpisodios(req, res) {
+    const usuario = req.session.usuario;
     try {
         const podcodigo = req.params.podcodigo;
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+        if (!podcast || String(podcast.usucodigo) !== String(usuario.codigo)) {
             return res.redirect('/meusPodcasts?error=Podcast não encontrado ou não pertence ao usuário');
         }
         const episodios = await buscarEpisodiosPorPodcast(podcodigo);
         res.render('meusEpisodios', {
             title: 'Podwave - Meus Episódios',
             episodios: episodios || [],
-            podcodigo: podcodigo,
-            usuarioEmail: global.usuarioEmail,
+            podcodigo,
+            usuarioEmail: usuario.email,
             query: req.query
         });
     } catch (err) {
         console.error('Erro ao carregar gestão de episódios:', err);
         res.redirect('/meusPodcasts?error=Erro ao carregar gestão de episódios');
     }
-});
+}
 
-router.get('/:podcodigo/adicionar', async function (req, res, next) {
-    if (!global.usuarioCodigo) return res.redirect('/login');
+export async function exibirAdicaoEpisodio(req, res) {
+    const usuario = req.session.usuario;
     const podcodigo = req.params.podcodigo;
     try {
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+        if (!podcast || String(podcast.usucodigo) !== String(usuario.codigo)) {
             return res.redirect('/meusPodcasts');
         }
         res.render('adicionar-episodio', {
             title: 'Podwave - Adicionar Episódio',
-            podcodigo: podcodigo,
-            usuarioEmail: global.usuarioEmail,
+            podcodigo,
+            usuarioEmail: usuario.email,
             error: req.query.error
         });
     } catch (err) {
         console.error('Erro ao carregar formulário de adição de episódio:', err);
         res.redirect(`/meusEpisodios/${podcodigo}?error=Erro ao carregar formulário`);
     }
-});
+}
 
-router.post('/:podcodigo/adicionar', async function (req, res, next) {
-    if (!global.usuarioCodigo) return res.redirect('/login');
+export async function adicionarEpisodio(req, res) {
+    const usuario = req.session.usuario;
     const podcodigo = req.params.podcodigo;
     try {
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+        if (!podcast || String(podcast.usucodigo) !== String(usuario.codigo)) {
             return res.redirect('/meusPodcasts');
         }
         const { epititulo, epidescricao, epiurl, epiduracao, epidata, epinumero, epireproducoes, epiaudio } = req.body;
         await inserirEpisodio({
             podcodigo: parseInt(podcodigo),
-            usucodigo: global.usuarioCodigo,
+            usucodigo: usuario.codigo,
             epititulo,
             epidescricao,
             epiurl,
@@ -70,44 +68,42 @@ router.post('/:podcodigo/adicionar', async function (req, res, next) {
             epidata: epidata || new Date().toISOString().split('T')[0],
             epinumero: parseInt(epinumero) || 0,
             epireproducoes: parseInt(epireproducoes) || 0,
-            epiaudio // Incluindo o campo epiaudio para streaming
+            epiaudio
         });
         res.redirect(`/meusEpisodios/${podcodigo}`);
     } catch (err) {
         console.error('Erro ao adicionar episódio:', err);
         res.redirect(`/meusEpisodios/${podcodigo}/adicionar?error=Erro ao adicionar episódio`);
     }
-});
+}
 
-router.get('/:podcodigo/:epicodigo/editar', async function (req, res, next) {
-    if (!global.usuarioCodigo) return res.redirect('/login');
+export async function exibirEdicaoEpisodio(req, res) {
+    const usuario = req.session.usuario;
     try {
-        const podcodigo = req.params.podcodigo;
-        const epicodigo = req.params.epicodigo;
+        const { podcodigo, epicodigo } = req.params;
         const episodio = await buscarEpisodioPorId(epicodigo);
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!episodio || episodio.podcodigo !== parseInt(podcodigo) || !podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+        if (!episodio || episodio.podcodigo !== parseInt(podcodigo) || !podcast || String(podcast.usucodigo) !== String(usuario.codigo)) {
             return res.redirect(`/meusEpisodios/${podcodigo}`);
         }
         res.render('editar-episodio', {
             title: 'Podwave - Editar Episódio',
-            episodio: episodio,
-            usuarioEmail: global.usuarioEmail,
+            episodio,
+            usuarioEmail: usuario.email,
             query: req.query
         });
     } catch (err) {
         console.error('Erro ao carregar edição de episódio:', err);
         res.redirect(`/meusEpisodios/${req.params.podcodigo}?error=Erro ao carregar edição`);
     }
-});
+}
 
-router.post('/:podcodigo/:epicodigo', async function (req, res, next) {
-    if (!global.usuarioCodigo) return res.redirect('/login');
-    const podcodigo = req.params.podcodigo;
-    const epicodigo = req.params.epicodigo;
+export async function editarEpisodio(req, res) {
+    const usuario = req.session.usuario;
+    const { podcodigo, epicodigo } = req.params;
     try {
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+        if (!podcast || String(podcast.usucodigo) !== String(usuario.codigo)) {
             return res.redirect(`/meusEpisodios/${podcodigo}`);
         }
         const { epititulo, epidescricao, epiurl, epiduracao, epidata, epinumero, epireproducoes, epiaudio } = req.body;
@@ -121,22 +117,21 @@ router.post('/:podcodigo/:epicodigo', async function (req, res, next) {
             epidata: epidata || new Date().toISOString().split('T')[0],
             epinumero: parseInt(epinumero) || 0,
             epireproducoes: parseInt(epireproducoes) || 0,
-            epiaudio // Adicionado para suportar atualização do caminho do áudio
+            epiaudio
         });
         res.redirect(`/meusEpisodios/${podcodigo}`);
     } catch (err) {
         console.error('Erro ao atualizar episódio:', err);
         res.redirect(`/meusEpisodios/${podcodigo}/${epicodigo}/editar?error=Erro ao atualizar episódio`);
     }
-});
+}
 
-router.post('/:podcodigo/:epicodigo/delete', async function (req, res, next) {
-    if (!global.usuarioCodigo) return res.redirect('/login');
-    const podcodigo = req.params.podcodigo;
-    const epicodigo = req.params.epicodigo;
+export async function excluirEpisodio(req, res) {
+    const usuario = req.session.usuario;
+    const { podcodigo, epicodigo } = req.params;
     try {
         const podcast = await buscarPodcastPorId(podcodigo);
-        if (!podcast || String(podcast.usucodigo) !== String(global.usuarioCodigo)) {
+        if (!podcast || String(podcast.usucodigo) !== String(usuario.codigo)) {
             return res.redirect(`/meusEpisodios/${podcodigo}`);
         }
         await deletarEpisodio(epicodigo, podcodigo);
@@ -145,6 +140,4 @@ router.post('/:podcodigo/:epicodigo/delete', async function (req, res, next) {
         console.error('Erro ao deletar episódio:', err);
         res.redirect(`/meusEpisodios/${podcodigo}?error=Erro ao deletar episódio`);
     }
-});
-
-module.exports = router;
+}
