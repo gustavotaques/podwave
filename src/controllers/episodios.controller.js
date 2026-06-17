@@ -176,7 +176,7 @@ export function transmitirAudio(req, res) {
                 return res.status(404).send('Episódio não encontrado');
             }
 
-            const audioFile = episodio.epiaudio || episodio.epiurl;
+            const audioFile = path.basename(episodio.epiaudio || episodio.epiurl);
             const audioPath = path.join(AUDIO_DIR, audioFile);
 
             if (!fs.existsSync(audioPath)) {

@@ -2,10 +2,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import session from 'express-session';
+import MySQLStoreFactory from 'express-mysql-session';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import routes from './routes/index.js';
+import pool from './config/database.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,10 +28,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+let sessionStore;
+if (process.env.NODE_ENV !== 'test') {
+    const MySQLStore = MySQLStoreFactory(session);
+    sessionStore = new MySQLStore({ createDatabaseTable: true, expiration: 86400000 }, pool);
+}
+
 app.use(session({
     secret: process.env.SESSION_SECRET || 'podwave-dev-secret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: { httpOnly: true, sameSite: 'lax', maxAge: 86400000 }
 }));
 
 app.use(routes);
