@@ -42,6 +42,11 @@ app.use(session({
     cookie: { httpOnly: true, sameSite: 'lax', maxAge: 86400000 }
 }));
 
+app.use((req, res, next) => {
+    res.locals.usuario = req.session.usuario || null;
+    next();
+});
+
 app.use(routes);
 
 // 404 → error handler
