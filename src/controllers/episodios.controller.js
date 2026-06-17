@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import rangeParser from 'range-parser';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { buscarEpisodiosPorPodcast, buscarEpisodioPorId } from '../repositories/episodios.repository.js';
 import { buscarPodcastPorId } from '../repositories/podcasts.repository.js';
 import { inserirComentario, buscarComentariosPorEpisodio } from '../repositories/comentarios.repository.js';
@@ -8,7 +11,7 @@ import { inserirAvaliacao, atualizarAvaliacao, buscarAvaliacaoPorUsuario } from 
 import { inserirFavorito, removerFavorito, verificarFavorito } from '../repositories/favoritos.repository.js';
 import { inserirProgresso, buscarProgressoPorUsuario } from '../repositories/progresso.repository.js';
 
-const AUDIO_DIR = path.join(import.meta.dirname, '../../public/audios');
+const AUDIO_DIR = path.join(__dirname, '../../public/audios');
 
 export async function listarEpisodios(req, res) {
     const { podcodigo } = req.params;
