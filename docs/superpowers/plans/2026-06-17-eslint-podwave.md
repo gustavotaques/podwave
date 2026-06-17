@@ -1036,6 +1036,56 @@ git push origin main --tags
 
 ---
 
+---
+
+### Task 6: Gerar ZIPs de entrega (antes e depois)
+
+**Files:**
+- Create: `podwave-antes-eslint.zip` (raiz)
+- Create: `podwave-depois-eslint.zip` (raiz)
+
+**Interfaces:**
+- Consumes: tags git `eslint-antes` e `eslint-depois` criadas nas Tasks 1 e 4
+- Produces: dois arquivos ZIP limpos (sem `node_modules`) prontos para entrega
+
+- [ ] **Step 1: Verificar que as duas tags existem**
+
+```bash
+git tag
+```
+
+Saída esperada: lista contendo `eslint-antes` e `eslint-depois`.
+
+- [ ] **Step 2: Gerar ZIP do estado "antes"**
+
+```bash
+git archive eslint-antes --output=podwave-antes-eslint.zip
+```
+
+- [ ] **Step 3: Gerar ZIP do estado "depois"**
+
+```bash
+git archive eslint-depois --output=podwave-depois-eslint.zip
+```
+
+- [ ] **Step 4: Verificar os ZIPs**
+
+```bash
+ls -lh podwave-antes-eslint.zip podwave-depois-eslint.zip
+```
+
+Os dois arquivos devem existir com tamanhos diferentes (o "depois" inclui `eslint.config.js` e as correções).
+
+- [ ] **Step 5: Conferir conteúdo do ZIP "antes" (opcional)**
+
+```bash
+unzip -l podwave-antes-eslint.zip | head -30
+```
+
+Confirmar que `eslint.config.js` **não** aparece na lista (ele não existia no estado eslint-antes).
+
+---
+
 ## Instruções de conversão para PDF
 
 Após inserir todos os screenshots nos locais marcados:
