@@ -360,7 +360,7 @@ CREATE TABLE `usuarios` (
   `usucodigo` int(11) NOT NULL AUTO_INCREMENT,
   `usunome` varchar(50) NOT NULL,
   `usuemail` varchar(50) NOT NULL,
-  `ususenha` varchar(30) NOT NULL,
+  `ususenha` varchar(72) NOT NULL,
   `tipo_usuario` enum('comum','admin') NOT NULL DEFAULT 'comum',
   PRIMARY KEY (`usucodigo`),
   UNIQUE KEY `usuemail` (`usuemail`)
