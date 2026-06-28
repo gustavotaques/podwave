@@ -1,0 +1,53 @@
+
+/home/taques/Projetos/podwave/src/app.js
+  57:25  warning  'next' is defined but never used  no-unused-vars
+
+/home/taques/Projetos/podwave/src/controllers/auth.controller.js
+  20:5  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/controllers/episodios.controller.js
+   29:5  warning  Unexpected console statement  no-console
+   71:5  warning  Unexpected console statement  no-console
+   90:5  warning  Unexpected console statement  no-console
+  125:5  warning  Unexpected console statement  no-console
+  146:5  warning  Unexpected console statement  no-console
+  165:5  warning  Unexpected console statement  no-console
+  220:7  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/controllers/listas.controller.js
+  19:5  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/controllers/meusEpisodios.controller.js
+   27:5  warning  Unexpected console statement  no-console
+   47:5  warning  Unexpected console statement  no-console
+   75:5  warning  Unexpected console statement  no-console
+   96:5  warning  Unexpected console statement  no-console
+  124:5  warning  Unexpected console statement  no-console
+  140:5  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/controllers/meusPodcasts.controller.js
+   23:5  warning  Unexpected console statement  no-console
+   50:5  warning  Unexpected console statement  no-console
+   66:5  warning  Unexpected console statement  no-console
+   86:5  warning  Unexpected console statement  no-console
+  106:5  warning  Unexpected console statement  no-console
+  117:5  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/repositories/episodios.repository.js
+  11:5  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/repositories/podcasts.repository.js
+  24:5  warning  Unexpected console statement  no-console
+  38:5  warning  Unexpected console statement  no-console
+  51:5  warning  Unexpected console statement  no-console
+  89:5  warning  Unexpected console statement  no-console
+
+/home/taques/Projetos/podwave/src/server.js
+   8:3  warning  Unexpected console statement  no-console
+  10:3  warning  Unexpected console statement  no-console
+  11:3  warning  Unexpected console statement  no-console
+  15:3  warning  Unexpected console statement  no-console
+  20:5  warning  Unexpected console statement  no-console
+
+✖ 32 problems (0 errors, 32 warnings)
+

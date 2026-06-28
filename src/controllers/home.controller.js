@@ -1,3 +1,3 @@
 export function exibirHome(req, res) {
-    res.render('index', { title: 'Podwave' });
+  res.render('index', { title: 'Podwave' });
 }

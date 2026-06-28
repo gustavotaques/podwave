@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { requireLogin } from '../middlewares/auth.js';
 import {
-    listarEpisodios,
-    exibirEpisodio,
-    comentarEpisodio,
-    avaliarEpisodio,
-    alternarFavorito,
-    salvarProgresso,
-    transmitirAudio
+  listarEpisodios,
+  exibirEpisodio,
+  comentarEpisodio,
+  avaliarEpisodio,
+  alternarFavorito,
+  salvarProgresso,
+  transmitirAudio
 } from '../controllers/episodios.controller.js';
 
 const router = Router();

@@ -15,8 +15,8 @@ const app = express();
 
 // Garante UTF-8 nas páginas renderizadas
 app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    next();
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  next();
 });
 
 app.set('views', path.join(__dirname, 'views'));
@@ -30,35 +30,35 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 let sessionStore;
 if (process.env.NODE_ENV !== 'test') {
-    const MySQLStore = MySQLStoreFactory(session);
-    sessionStore = new MySQLStore({ createDatabaseTable: true, expiration: 86400000 }, pool);
+  const MySQLStore = MySQLStoreFactory(session);
+  sessionStore = new MySQLStore({ createDatabaseTable: true, expiration: 86400000 }, pool);
 }
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'podwave-dev-secret',
-    resave: false,
-    saveUninitialized: false,
-    store: sessionStore,
-    cookie: { httpOnly: true, sameSite: 'lax', maxAge: 86400000 }
+  secret: process.env.SESSION_SECRET || 'podwave-dev-secret',
+  resave: false,
+  saveUninitialized: false,
+  store: sessionStore,
+  cookie: { httpOnly: true, sameSite: 'lax', maxAge: 86400000 }
 }));
 
 app.use((req, res, next) => {
-    res.locals.usuario = req.session.usuario || null;
-    next();
+  res.locals.usuario = req.session.usuario || null;
+  next();
 });
 
 app.use(routes);
 
 // 404 → error handler
 app.use((req, res, next) => {
-    next(createError(404));
+  next(createError(404));
 });
 
 app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    res.status(err.status || 500);
-    res.render('error');
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 export default app;
