@@ -1,0 +1,769 @@
+
+/home/taques/Projetos/podwave/src/app.js
+  18:1   error    Expected indentation of 2 spaces but found 4  indent
+  19:1   error    Expected indentation of 2 spaces but found 4  indent
+  33:1   error    Expected indentation of 2 spaces but found 4  indent
+  34:1   error    Expected indentation of 2 spaces but found 4  indent
+  38:1   error    Expected indentation of 2 spaces but found 4  indent
+  39:1   error    Expected indentation of 2 spaces but found 4  indent
+  40:1   error    Expected indentation of 2 spaces but found 4  indent
+  41:1   error    Expected indentation of 2 spaces but found 4  indent
+  42:1   error    Expected indentation of 2 spaces but found 4  indent
+  46:1   error    Expected indentation of 2 spaces but found 4  indent
+  47:1   error    Expected indentation of 2 spaces but found 4  indent
+  54:1   error    Expected indentation of 2 spaces but found 4  indent
+  57:25  warning  'next' is defined but never used              no-unused-vars
+  58:1   error    Expected indentation of 2 spaces but found 4  indent
+  59:1   error    Expected indentation of 2 spaces but found 4  indent
+  60:1   error    Expected indentation of 2 spaces but found 4  indent
+  61:1   error    Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/config/database.js
+   7:1  error  Expected indentation of 2 spaces but found 4  indent
+   8:1  error  Expected indentation of 2 spaces but found 4  indent
+   9:1  error  Expected indentation of 2 spaces but found 4  indent
+  10:1  error  Expected indentation of 2 spaces but found 4  indent
+  11:1  error  Expected indentation of 2 spaces but found 4  indent
+  12:1  error  Expected indentation of 2 spaces but found 4  indent
+  13:1  error  Expected indentation of 2 spaces but found 4  indent
+  14:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/controllers/auth.controller.js
+   4:1  error    Expected indentation of 2 spaces but found 4   indent
+   5:1  error    Expected indentation of 4 spaces but found 8   indent
+   6:1  error    Expected indentation of 2 spaces but found 4   indent
+   7:1  error    Expected indentation of 2 spaces but found 4   indent
+  11:1  error    Expected indentation of 2 spaces but found 4   indent
+  12:1  error    Expected indentation of 2 spaces but found 4   indent
+  13:1  error    Expected indentation of 4 spaces but found 8   indent
+  14:1  error    Expected indentation of 4 spaces but found 8   indent
+  15:1  error    Expected indentation of 6 spaces but found 12  indent
+  16:1  error    Expected indentation of 4 spaces but found 8   indent
+  17:1  error    Expected indentation of 4 spaces but found 8   indent
+  18:1  error    Expected indentation of 4 spaces but found 8   indent
+  19:1  error    Expected indentation of 2 spaces but found 4   indent
+  20:1  error    Expected indentation of 4 spaces but found 8   indent
+  20:9  warning  Unexpected console statement                   no-console
+  21:1  error    Expected indentation of 4 spaces but found 8   indent
+  22:1  error    Expected indentation of 2 spaces but found 4   indent
+  26:1  error    Expected indentation of 2 spaces but found 4   indent
+  27:1  error    Expected indentation of 4 spaces but found 8   indent
+  28:1  error    Expected indentation of 2 spaces but found 4   indent
+  29:1  error    Expected indentation of 2 spaces but found 4   indent
+  33:1  error    Expected indentation of 2 spaces but found 4   indent
+  35:1  error    Expected indentation of 2 spaces but found 4   indent
+  36:1  error    Expected indentation of 2 spaces but found 4   indent
+  37:1  error    Expected indentation of 4 spaces but found 8   indent
+  38:1  error    Expected indentation of 2 spaces but found 4   indent
+  40:1  error    Expected indentation of 2 spaces but found 4   indent
+  41:1  error    Expected indentation of 2 spaces but found 4   indent
+  42:1  error    Expected indentation of 4 spaces but found 8   indent
+  43:1  error    Expected indentation of 2 spaces but found 4   indent
+  44:1  error    Expected indentation of 2 spaces but found 4   indent
+  48:1  error    Expected indentation of 2 spaces but found 4   indent
+  49:1  error    Expected indentation of 4 spaces but found 8   indent
+  50:1  error    Expected indentation of 2 spaces but found 4   indent
+
+/home/taques/Projetos/podwave/src/controllers/episodios.controller.js
+   17:1   error    Expected indentation of 2 spaces but found 4    indent
+   18:1   error    Expected indentation of 2 spaces but found 4    indent
+   19:1   error    Expected indentation of 4 spaces but found 8    indent
+   20:1   error    Expected indentation of 4 spaces but found 8    indent
+   21:1   error    Expected indentation of 4 spaces but found 8    indent
+   22:1   error    Expected indentation of 6 spaces but found 12   indent
+   23:1   error    Expected indentation of 6 spaces but found 12   indent
+   24:1   error    Expected indentation of 6 spaces but found 12   indent
+   25:1   error    Expected indentation of 6 spaces but found 12   indent
+   26:1   error    Expected indentation of 6 spaces but found 12   indent
+   27:1   error    Expected indentation of 4 spaces but found 8    indent
+   28:1   error    Expected indentation of 2 spaces but found 4    indent
+   29:1   error    Expected indentation of 4 spaces but found 8    indent
+   29:9   warning  Unexpected console statement                    no-console
+   30:1   error    Expected indentation of 4 spaces but found 8    indent
+   31:1   error    Expected indentation of 6 spaces but found 12   indent
+   32:1   error    Expected indentation of 6 spaces but found 12   indent
+   33:1   error    Expected indentation of 6 spaces but found 12   indent
+   34:1   error    Expected indentation of 6 spaces but found 12   indent
+   35:1   error    Expected indentation of 6 spaces but found 12   indent
+   36:1   error    Expected indentation of 4 spaces but found 8    indent
+   37:1   error    Expected indentation of 2 spaces but found 4    indent
+   41:1   error    Expected indentation of 2 spaces but found 4    indent
+   42:1   error    Expected indentation of 2 spaces but found 4    indent
+   43:1   error    Expected indentation of 2 spaces but found 4    indent
+   44:1   error    Expected indentation of 4 spaces but found 8    indent
+   45:1   error    Expected indentation of 4 spaces but found 8    indent
+   46:1   error    Expected indentation of 6 spaces but found 12   indent
+   47:1   error    Expected indentation of 4 spaces but found 8    indent
+   49:1   error    Expected indentation of 4 spaces but found 8    indent
+   50:1   error    Expected indentation of 4 spaces but found 8    indent
+   51:1   error    Expected indentation of 6 spaces but found 12   indent
+   52:1   error    Expected indentation of 4 spaces but found 8    indent
+   54:1   error    Expected indentation of 4 spaces but found 8    indent
+   55:1   error    Expected indentation of 4 spaces but found 8    indent
+   56:1   error    Expected indentation of 4 spaces but found 8    indent
+   57:1   error    Expected indentation of 4 spaces but found 8    indent
+   59:1   error    Expected indentation of 4 spaces but found 8    indent
+   60:1   error    Expected indentation of 6 spaces but found 12   indent
+   61:1   error    Expected indentation of 6 spaces but found 12   indent
+   62:1   error    Expected indentation of 6 spaces but found 12   indent
+   63:1   error    Expected indentation of 6 spaces but found 12   indent
+   64:1   error    Expected indentation of 6 spaces but found 12   indent
+   65:1   error    Expected indentation of 6 spaces but found 12   indent
+   66:1   error    Expected indentation of 6 spaces but found 12   indent
+   67:1   error    Expected indentation of 6 spaces but found 12   indent
+   68:1   error    Expected indentation of 6 spaces but found 12   indent
+   69:1   error    Expected indentation of 4 spaces but found 8    indent
+   70:1   error    Expected indentation of 2 spaces but found 4    indent
+   71:1   error    Expected indentation of 4 spaces but found 8    indent
+   71:9   warning  Unexpected console statement                    no-console
+   72:1   error    Expected indentation of 4 spaces but found 8    indent
+   73:1   error    Expected indentation of 2 spaces but found 4    indent
+   77:1   error    Expected indentation of 2 spaces but found 4    indent
+   78:1   error    Expected indentation of 2 spaces but found 4    indent
+   79:1   error    Expected indentation of 2 spaces but found 4    indent
+   80:1   error    Expected indentation of 4 spaces but found 8    indent
+   81:1   error    Expected indentation of 4 spaces but found 8    indent
+   82:1   error    Expected indentation of 6 spaces but found 12   indent
+   83:1   error    Expected indentation of 6 spaces but found 12   indent
+   84:1   error    Expected indentation of 6 spaces but found 12   indent
+   85:1   error    Expected indentation of 6 spaces but found 12   indent
+   86:1   error    Expected indentation of 6 spaces but found 12   indent
+   87:1   error    Expected indentation of 4 spaces but found 8    indent
+   88:1   error    Expected indentation of 4 spaces but found 8    indent
+   89:1   error    Expected indentation of 2 spaces but found 4    indent
+   90:1   error    Expected indentation of 4 spaces but found 8    indent
+   90:9   warning  Unexpected console statement                    no-console
+   91:1   error    Expected indentation of 4 spaces but found 8    indent
+   92:1   error    Expected indentation of 2 spaces but found 4    indent
+   96:1   error    Expected indentation of 2 spaces but found 4    indent
+   97:1   error    Expected indentation of 2 spaces but found 4    indent
+   98:1   error    Expected indentation of 2 spaces but found 4    indent
+   99:1   error    Expected indentation of 4 spaces but found 8    indent
+  101:1   error    Expected indentation of 4 spaces but found 8    indent
+  102:1   error    Expected indentation of 6 spaces but found 12   indent
+  103:1   error    Expected indentation of 4 spaces but found 8    indent
+  105:1   error    Expected indentation of 4 spaces but found 8    indent
+  106:1   error    Expected indentation of 4 spaces but found 8    indent
+  107:1   error    Expected indentation of 6 spaces but found 12   indent
+  108:1   error    Expected indentation of 8 spaces but found 16   indent
+  109:1   error    Expected indentation of 8 spaces but found 16   indent
+  110:1   error    Expected indentation of 8 spaces but found 16   indent
+  111:1   error    Expected indentation of 8 spaces but found 16   indent
+  112:1   error    Expected indentation of 6 spaces but found 12   indent
+  113:1   error    Expected indentation of 4 spaces but found 8    indent
+  114:1   error    Expected indentation of 6 spaces but found 12   indent
+  115:1   error    Expected indentation of 8 spaces but found 16   indent
+  116:1   error    Expected indentation of 8 spaces but found 16   indent
+  117:1   error    Expected indentation of 8 spaces but found 16   indent
+  118:1   error    Expected indentation of 8 spaces but found 16   indent
+  119:1   error    Expected indentation of 8 spaces but found 16   indent
+  120:1   error    Expected indentation of 6 spaces but found 12   indent
+  121:1   error    Expected indentation of 4 spaces but found 8    indent
+  123:1   error    Expected indentation of 4 spaces but found 8    indent
+  124:1   error    Expected indentation of 2 spaces but found 4    indent
+  125:1   error    Expected indentation of 4 spaces but found 8    indent
+  125:9   warning  Unexpected console statement                    no-console
+  126:1   error    Expected indentation of 4 spaces but found 8    indent
+  127:1   error    Expected indentation of 2 spaces but found 4    indent
+  131:1   error    Expected indentation of 2 spaces but found 4    indent
+  132:1   error    Expected indentation of 2 spaces but found 4    indent
+  133:1   error    Expected indentation of 2 spaces but found 4    indent
+  134:1   error    Expected indentation of 4 spaces but found 8    indent
+  135:1   error    Expected indentation of 4 spaces but found 8    indent
+  136:1   error    Expected indentation of 6 spaces but found 12   indent
+  137:1   error    Expected indentation of 4 spaces but found 8    indent
+  138:1   error    Expected indentation of 6 spaces but found 12   indent
+  139:1   error    Expected indentation of 8 spaces but found 16   indent
+  140:1   error    Expected indentation of 8 spaces but found 16   indent
+  141:1   error    Expected indentation of 8 spaces but found 16   indent
+  142:1   error    Expected indentation of 6 spaces but found 12   indent
+  143:1   error    Expected indentation of 4 spaces but found 8    indent
+  144:1   error    Expected indentation of 4 spaces but found 8    indent
+  145:1   error    Expected indentation of 2 spaces but found 4    indent
+  146:1   error    Expected indentation of 4 spaces but found 8    indent
+  146:9   warning  Unexpected console statement                    no-console
+  147:1   error    Expected indentation of 4 spaces but found 8    indent
+  148:1   error    Expected indentation of 2 spaces but found 4    indent
+  152:1   error    Expected indentation of 2 spaces but found 4    indent
+  153:1   error    Expected indentation of 2 spaces but found 4    indent
+  154:1   error    Expected indentation of 2 spaces but found 4    indent
+  155:1   error    Expected indentation of 4 spaces but found 8    indent
+  156:1   error    Expected indentation of 4 spaces but found 8    indent
+  157:1   error    Expected indentation of 4 spaces but found 8    indent
+  158:1   error    Expected indentation of 6 spaces but found 12   indent
+  159:1   error    Expected indentation of 6 spaces but found 12   indent
+  160:1   error    Expected indentation of 6 spaces but found 12   indent
+  161:1   error    Expected indentation of 6 spaces but found 12   indent
+  162:1   error    Expected indentation of 4 spaces but found 8    indent
+  163:1   error    Expected indentation of 4 spaces but found 8    indent
+  164:1   error    Expected indentation of 2 spaces but found 4    indent
+  165:1   error    Expected indentation of 4 spaces but found 8    indent
+  165:9   warning  Unexpected console statement                    no-console
+  166:1   error    Expected indentation of 4 spaces but found 8    indent
+  167:1   error    Expected indentation of 2 spaces but found 4    indent
+  171:1   error    Expected indentation of 2 spaces but found 4    indent
+  173:1   error    Expected indentation of 2 spaces but found 4    indent
+  174:1   error    Expected indentation of 4 spaces but found 8    indent
+  175:1   error    Expected indentation of 6 spaces but found 12   indent
+  176:1   error    Expected indentation of 8 spaces but found 16   indent
+  177:1   error    Expected indentation of 6 spaces but found 12   indent
+  179:1   error    Expected indentation of 6 spaces but found 12   indent
+  180:1   error    Expected indentation of 6 spaces but found 12   indent
+  182:1   error    Expected indentation of 6 spaces but found 12   indent
+  183:1   error    Expected indentation of 8 spaces but found 16   indent
+  184:1   error    Expected indentation of 6 spaces but found 12   indent
+  186:1   error    Expected indentation of 6 spaces but found 12   indent
+  187:1   error    Expected indentation of 6 spaces but found 12   indent
+  188:1   error    Expected indentation of 6 spaces but found 12   indent
+  190:1   error    Expected indentation of 6 spaces but found 12   indent
+  191:1   error    Expected indentation of 8 spaces but found 16   indent
+  192:1   error    Expected indentation of 8 spaces but found 16   indent
+  193:1   error    Expected indentation of 10 spaces but found 20  indent
+  194:1   error    Expected indentation of 8 spaces but found 16   indent
+  195:1   error    Expected indentation of 8 spaces but found 16   indent
+  196:1   error    Expected indentation of 10 spaces but found 20  indent
+  197:1   error    Expected indentation of 8 spaces but found 16   indent
+  199:1   error    Expected indentation of 8 spaces but found 16   indent
+  200:1   error    Expected indentation of 8 spaces but found 16   indent
+  201:1   error    Expected indentation of 8 spaces but found 16   indent
+  202:1   error    Expected indentation of 8 spaces but found 16   indent
+  204:1   error    Expected indentation of 8 spaces but found 16   indent
+  205:1   error    Expected indentation of 10 spaces but found 20  indent
+  206:1   error    Expected indentation of 10 spaces but found 20  indent
+  207:1   error    Expected indentation of 10 spaces but found 20  indent
+  208:1   error    Expected indentation of 10 spaces but found 20  indent
+  209:1   error    Expected indentation of 8 spaces but found 16   indent
+  210:1   error    Expected indentation of 8 spaces but found 16   indent
+  211:1   error    Expected indentation of 6 spaces but found 12   indent
+  212:1   error    Expected indentation of 8 spaces but found 16   indent
+  213:1   error    Expected indentation of 10 spaces but found 20  indent
+  214:1   error    Expected indentation of 10 spaces but found 20  indent
+  215:1   error    Expected indentation of 8 spaces but found 16   indent
+  216:1   error    Expected indentation of 8 spaces but found 16   indent
+  217:1   error    Expected indentation of 6 spaces but found 12   indent
+  218:1   error    Expected indentation of 4 spaces but found 8    indent
+  219:1   error    Expected indentation of 4 spaces but found 8    indent
+  220:1   error    Expected indentation of 6 spaces but found 12   indent
+  220:13  warning  Unexpected console statement                    no-console
+  221:1   error    Expected indentation of 6 spaces but found 12   indent
+  222:1   error    Expected indentation of 4 spaces but found 8    indent
+
+/home/taques/Projetos/podwave/src/controllers/home.controller.js
+  2:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/controllers/listas.controller.js
+   4:1  error    Expected indentation of 2 spaces but found 4   indent
+   5:1  error    Expected indentation of 4 spaces but found 8   indent
+   6:1  error    Expected indentation of 4 spaces but found 8   indent
+   7:1  error    Expected indentation of 6 spaces but found 12  indent
+   8:1  error    Expected indentation of 6 spaces but found 12  indent
+   9:1  error    Expected indentation of 4 spaces but found 8   indent
+  11:1  error    Expected indentation of 4 spaces but found 8   indent
+  12:1  error    Expected indentation of 6 spaces but found 12  indent
+  13:1  error    Expected indentation of 6 spaces but found 12  indent
+  14:1  error    Expected indentation of 6 spaces but found 12  indent
+  15:1  error    Expected indentation of 6 spaces but found 12  indent
+  16:1  error    Expected indentation of 6 spaces but found 12  indent
+  17:1  error    Expected indentation of 4 spaces but found 8   indent
+  18:1  error    Expected indentation of 2 spaces but found 4   indent
+  19:1  error    Expected indentation of 4 spaces but found 8   indent
+  19:9  warning  Unexpected console statement                   no-console
+  20:1  error    Expected indentation of 4 spaces but found 8   indent
+  21:1  error    Expected indentation of 6 spaces but found 12  indent
+  22:1  error    Expected indentation of 6 spaces but found 12  indent
+  23:1  error    Expected indentation of 6 spaces but found 12  indent
+  24:1  error    Expected indentation of 6 spaces but found 12  indent
+  25:1  error    Expected indentation of 6 spaces but found 12  indent
+  26:1  error    Expected indentation of 4 spaces but found 8   indent
+  27:1  error    Expected indentation of 2 spaces but found 4   indent
+
+/home/taques/Projetos/podwave/src/controllers/meusEpisodios.controller.js
+    2:1  error    Expected indentation of 2 spaces but found 4   indent
+    3:1  error    Expected indentation of 2 spaces but found 4   indent
+    4:1  error    Expected indentation of 2 spaces but found 4   indent
+    5:1  error    Expected indentation of 2 spaces but found 4   indent
+    6:1  error    Expected indentation of 2 spaces but found 4   indent
+   11:1  error    Expected indentation of 2 spaces but found 4   indent
+   12:1  error    Expected indentation of 2 spaces but found 4   indent
+   13:1  error    Expected indentation of 4 spaces but found 8   indent
+   14:1  error    Expected indentation of 4 spaces but found 8   indent
+   15:1  error    Expected indentation of 4 spaces but found 8   indent
+   16:1  error    Expected indentation of 6 spaces but found 12  indent
+   17:1  error    Expected indentation of 4 spaces but found 8   indent
+   18:1  error    Expected indentation of 4 spaces but found 8   indent
+   19:1  error    Expected indentation of 4 spaces but found 8   indent
+   20:1  error    Expected indentation of 6 spaces but found 12  indent
+   21:1  error    Expected indentation of 6 spaces but found 12  indent
+   22:1  error    Expected indentation of 6 spaces but found 12  indent
+   23:1  error    Expected indentation of 6 spaces but found 12  indent
+   24:1  error    Expected indentation of 6 spaces but found 12  indent
+   25:1  error    Expected indentation of 4 spaces but found 8   indent
+   26:1  error    Expected indentation of 2 spaces but found 4   indent
+   27:1  error    Expected indentation of 4 spaces but found 8   indent
+   27:9  warning  Unexpected console statement                   no-console
+   28:1  error    Expected indentation of 4 spaces but found 8   indent
+   29:1  error    Expected indentation of 2 spaces but found 4   indent
+   33:1  error    Expected indentation of 2 spaces but found 4   indent
+   34:1  error    Expected indentation of 2 spaces but found 4   indent
+   35:1  error    Expected indentation of 2 spaces but found 4   indent
+   36:1  error    Expected indentation of 4 spaces but found 8   indent
+   37:1  error    Expected indentation of 4 spaces but found 8   indent
+   38:1  error    Expected indentation of 6 spaces but found 12  indent
+   39:1  error    Expected indentation of 4 spaces but found 8   indent
+   40:1  error    Expected indentation of 4 spaces but found 8   indent
+   41:1  error    Expected indentation of 6 spaces but found 12  indent
+   42:1  error    Expected indentation of 6 spaces but found 12  indent
+   43:1  error    Expected indentation of 6 spaces but found 12  indent
+   44:1  error    Expected indentation of 6 spaces but found 12  indent
+   45:1  error    Expected indentation of 4 spaces but found 8   indent
+   46:1  error    Expected indentation of 2 spaces but found 4   indent
+   47:1  error    Expected indentation of 4 spaces but found 8   indent
+   47:9  warning  Unexpected console statement                   no-console
+   48:1  error    Expected indentation of 4 spaces but found 8   indent
+   49:1  error    Expected indentation of 2 spaces but found 4   indent
+   53:1  error    Expected indentation of 2 spaces but found 4   indent
+   54:1  error    Expected indentation of 2 spaces but found 4   indent
+   55:1  error    Expected indentation of 2 spaces but found 4   indent
+   56:1  error    Expected indentation of 4 spaces but found 8   indent
+   57:1  error    Expected indentation of 4 spaces but found 8   indent
+   58:1  error    Expected indentation of 6 spaces but found 12  indent
+   59:1  error    Expected indentation of 4 spaces but found 8   indent
+   60:1  error    Expected indentation of 4 spaces but found 8   indent
+   61:1  error    Expected indentation of 4 spaces but found 8   indent
+   62:1  error    Expected indentation of 6 spaces but found 12  indent
+   63:1  error    Expected indentation of 6 spaces but found 12  indent
+   64:1  error    Expected indentation of 6 spaces but found 12  indent
+   65:1  error    Expected indentation of 6 spaces but found 12  indent
+   66:1  error    Expected indentation of 6 spaces but found 12  indent
+   67:1  error    Expected indentation of 6 spaces but found 12  indent
+   68:1  error    Expected indentation of 6 spaces but found 12  indent
+   69:1  error    Expected indentation of 6 spaces but found 12  indent
+   70:1  error    Expected indentation of 6 spaces but found 12  indent
+   71:1  error    Expected indentation of 6 spaces but found 12  indent
+   72:1  error    Expected indentation of 4 spaces but found 8   indent
+   73:1  error    Expected indentation of 4 spaces but found 8   indent
+   74:1  error    Expected indentation of 2 spaces but found 4   indent
+   75:1  error    Expected indentation of 4 spaces but found 8   indent
+   75:9  warning  Unexpected console statement                   no-console
+   76:1  error    Expected indentation of 4 spaces but found 8   indent
+   77:1  error    Expected indentation of 2 spaces but found 4   indent
+   81:1  error    Expected indentation of 2 spaces but found 4   indent
+   82:1  error    Expected indentation of 2 spaces but found 4   indent
+   83:1  error    Expected indentation of 4 spaces but found 8   indent
+   84:1  error    Expected indentation of 4 spaces but found 8   indent
+   85:1  error    Expected indentation of 4 spaces but found 8   indent
+   86:1  error    Expected indentation of 4 spaces but found 8   indent
+   87:1  error    Expected indentation of 6 spaces but found 12  indent
+   88:1  error    Expected indentation of 4 spaces but found 8   indent
+   89:1  error    Expected indentation of 4 spaces but found 8   indent
+   90:1  error    Expected indentation of 6 spaces but found 12  indent
+   91:1  error    Expected indentation of 6 spaces but found 12  indent
+   92:1  error    Expected indentation of 6 spaces but found 12  indent
+   93:1  error    Expected indentation of 6 spaces but found 12  indent
+   94:1  error    Expected indentation of 4 spaces but found 8   indent
+   95:1  error    Expected indentation of 2 spaces but found 4   indent
+   96:1  error    Expected indentation of 4 spaces but found 8   indent
+   96:9  warning  Unexpected console statement                   no-console
+   97:1  error    Expected indentation of 4 spaces but found 8   indent
+   98:1  error    Expected indentation of 2 spaces but found 4   indent
+  102:1  error    Expected indentation of 2 spaces but found 4   indent
+  103:1  error    Expected indentation of 2 spaces but found 4   indent
+  104:1  error    Expected indentation of 2 spaces but found 4   indent
+  105:1  error    Expected indentation of 4 spaces but found 8   indent
+  106:1  error    Expected indentation of 4 spaces but found 8   indent
+  107:1  error    Expected indentation of 6 spaces but found 12  indent
+  108:1  error    Expected indentation of 4 spaces but found 8   indent
+  109:1  error    Expected indentation of 4 spaces but found 8   indent
+  110:1  error    Expected indentation of 4 spaces but found 8   indent
+  111:1  error    Expected indentation of 6 spaces but found 12  indent
+  112:1  error    Expected indentation of 6 spaces but found 12  indent
+  113:1  error    Expected indentation of 6 spaces but found 12  indent
+  114:1  error    Expected indentation of 6 spaces but found 12  indent
+  115:1  error    Expected indentation of 6 spaces but found 12  indent
+  116:1  error    Expected indentation of 6 spaces but found 12  indent
+  117:1  error    Expected indentation of 6 spaces but found 12  indent
+  118:1  error    Expected indentation of 6 spaces but found 12  indent
+  119:1  error    Expected indentation of 6 spaces but found 12  indent
+  120:1  error    Expected indentation of 6 spaces but found 12  indent
+  121:1  error    Expected indentation of 4 spaces but found 8   indent
+  122:1  error    Expected indentation of 4 spaces but found 8   indent
+  123:1  error    Expected indentation of 2 spaces but found 4   indent
+  124:1  error    Expected indentation of 4 spaces but found 8   indent
+  124:9  warning  Unexpected console statement                   no-console
+  125:1  error    Expected indentation of 4 spaces but found 8   indent
+  126:1  error    Expected indentation of 2 spaces but found 4   indent
+  130:1  error    Expected indentation of 2 spaces but found 4   indent
+  131:1  error    Expected indentation of 2 spaces but found 4   indent
+  132:1  error    Expected indentation of 2 spaces but found 4   indent
+  133:1  error    Expected indentation of 4 spaces but found 8   indent
+  134:1  error    Expected indentation of 4 spaces but found 8   indent
+  135:1  error    Expected indentation of 6 spaces but found 12  indent
+  136:1  error    Expected indentation of 4 spaces but found 8   indent
+  137:1  error    Expected indentation of 4 spaces but found 8   indent
+  138:1  error    Expected indentation of 4 spaces but found 8   indent
+  139:1  error    Expected indentation of 2 spaces but found 4   indent
+  140:1  error    Expected indentation of 4 spaces but found 8   indent
+  140:9  warning  Unexpected console statement                   no-console
+  141:1  error    Expected indentation of 4 spaces but found 8   indent
+  142:1  error    Expected indentation of 2 spaces but found 4   indent
+
+/home/taques/Projetos/podwave/src/controllers/meusPodcasts.controller.js
+    2:1  error    Expected indentation of 2 spaces but found 4   indent
+    3:1  error    Expected indentation of 2 spaces but found 4   indent
+    4:1  error    Expected indentation of 2 spaces but found 4   indent
+    5:1  error    Expected indentation of 2 spaces but found 4   indent
+    6:1  error    Expected indentation of 2 spaces but found 4   indent
+    7:1  error    Expected indentation of 2 spaces but found 4   indent
+   11:1  error    Expected indentation of 2 spaces but found 4   indent
+   12:1  error    Expected indentation of 2 spaces but found 4   indent
+   13:1  error    Expected indentation of 4 spaces but found 8   indent
+   14:1  error    Expected indentation of 4 spaces but found 8   indent
+   15:1  error    Expected indentation of 4 spaces but found 8   indent
+   16:1  error    Expected indentation of 6 spaces but found 12  indent
+   17:1  error    Expected indentation of 6 spaces but found 12  indent
+   18:1  error    Expected indentation of 6 spaces but found 12  indent
+   19:1  error    Expected indentation of 6 spaces but found 12  indent
+   20:1  error    Expected indentation of 6 spaces but found 12  indent
+   21:1  error    Expected indentation of 4 spaces but found 8   indent
+   22:1  error    Expected indentation of 2 spaces but found 4   indent
+   23:1  error    Expected indentation of 4 spaces but found 8   indent
+   23:9  warning  Unexpected console statement                   no-console
+   24:1  error    Expected indentation of 4 spaces but found 8   indent
+   25:1  error    Expected indentation of 6 spaces but found 12  indent
+   26:1  error    Expected indentation of 6 spaces but found 12  indent
+   27:1  error    Expected indentation of 6 spaces but found 12  indent
+   28:1  error    Expected indentation of 6 spaces but found 12  indent
+   29:1  error    Expected indentation of 6 spaces but found 12  indent
+   30:1  error    Expected indentation of 4 spaces but found 8   indent
+   31:1  error    Expected indentation of 2 spaces but found 4   indent
+   35:1  error    Expected indentation of 2 spaces but found 4   indent
+   36:1  error    Expected indentation of 2 spaces but found 4   indent
+   37:1  error    Expected indentation of 4 spaces but found 8   indent
+   38:1  error    Expected indentation of 4 spaces but found 8   indent
+   39:1  error    Expected indentation of 6 spaces but found 12  indent
+   40:1  error    Expected indentation of 4 spaces but found 8   indent
+   41:1  error    Expected indentation of 4 spaces but found 8   indent
+   42:1  error    Expected indentation of 4 spaces but found 8   indent
+   43:1  error    Expected indentation of 6 spaces but found 12  indent
+   44:1  error    Expected indentation of 6 spaces but found 12  indent
+   45:1  error    Expected indentation of 6 spaces but found 12  indent
+   46:1  error    Expected indentation of 6 spaces but found 12  indent
+   47:1  error    Expected indentation of 6 spaces but found 12  indent
+   48:1  error    Expected indentation of 4 spaces but found 8   indent
+   49:1  error    Expected indentation of 2 spaces but found 4   indent
+   50:1  error    Expected indentation of 4 spaces but found 8   indent
+   50:9  warning  Unexpected console statement                   no-console
+   51:1  error    Expected indentation of 4 spaces but found 8   indent
+   52:1  error    Expected indentation of 2 spaces but found 4   indent
+   56:1  error    Expected indentation of 2 spaces but found 4   indent
+   57:1  error    Expected indentation of 2 spaces but found 4   indent
+   58:1  error    Expected indentation of 4 spaces but found 8   indent
+   59:1  error    Expected indentation of 4 spaces but found 8   indent
+   60:1  error    Expected indentation of 6 spaces but found 12  indent
+   61:1  error    Expected indentation of 6 spaces but found 12  indent
+   62:1  error    Expected indentation of 6 spaces but found 12  indent
+   63:1  error    Expected indentation of 6 spaces but found 12  indent
+   64:1  error    Expected indentation of 4 spaces but found 8   indent
+   65:1  error    Expected indentation of 2 spaces but found 4   indent
+   66:1  error    Expected indentation of 4 spaces but found 8   indent
+   66:9  warning  Unexpected console statement                   no-console
+   67:1  error    Expected indentation of 4 spaces but found 8   indent
+   68:1  error    Expected indentation of 2 spaces but found 4   indent
+   72:1  error    Expected indentation of 2 spaces but found 4   indent
+   73:1  error    Expected indentation of 2 spaces but found 4   indent
+   74:1  error    Expected indentation of 4 spaces but found 8   indent
+   75:1  error    Expected indentation of 4 spaces but found 8   indent
+   76:1  error    Expected indentation of 6 spaces but found 12  indent
+   77:1  error    Expected indentation of 6 spaces but found 12  indent
+   78:1  error    Expected indentation of 6 spaces but found 12  indent
+   79:1  error    Expected indentation of 6 spaces but found 12  indent
+   80:1  error    Expected indentation of 6 spaces but found 12  indent
+   81:1  error    Expected indentation of 6 spaces but found 12  indent
+   82:1  error    Expected indentation of 6 spaces but found 12  indent
+   83:1  error    Expected indentation of 4 spaces but found 8   indent
+   84:1  error    Expected indentation of 4 spaces but found 8   indent
+   85:1  error    Expected indentation of 2 spaces but found 4   indent
+   86:1  error    Expected indentation of 4 spaces but found 8   indent
+   86:9  warning  Unexpected console statement                   no-console
+   87:1  error    Expected indentation of 4 spaces but found 8   indent
+   88:1  error    Expected indentation of 2 spaces but found 4   indent
+   92:1  error    Expected indentation of 2 spaces but found 4   indent
+   93:1  error    Expected indentation of 2 spaces but found 4   indent
+   94:1  error    Expected indentation of 2 spaces but found 4   indent
+   95:1  error    Expected indentation of 4 spaces but found 8   indent
+   96:1  error    Expected indentation of 4 spaces but found 8   indent
+   97:1  error    Expected indentation of 6 spaces but found 12  indent
+   98:1  error    Expected indentation of 6 spaces but found 12  indent
+   99:1  error    Expected indentation of 6 spaces but found 12  indent
+  100:1  error    Expected indentation of 6 spaces but found 12  indent
+  101:1  error    Expected indentation of 6 spaces but found 12  indent
+  102:1  error    Expected indentation of 6 spaces but found 12  indent
+  103:1  error    Expected indentation of 4 spaces but found 8   indent
+  104:1  error    Expected indentation of 4 spaces but found 8   indent
+  105:1  error    Expected indentation of 2 spaces but found 4   indent
+  106:1  error    Expected indentation of 4 spaces but found 8   indent
+  106:9  warning  Unexpected console statement                   no-console
+  107:1  error    Expected indentation of 4 spaces but found 8   indent
+  108:1  error    Expected indentation of 2 spaces but found 4   indent
+  112:1  error    Expected indentation of 2 spaces but found 4   indent
+  113:1  error    Expected indentation of 2 spaces but found 4   indent
+  114:1  error    Expected indentation of 4 spaces but found 8   indent
+  115:1  error    Expected indentation of 4 spaces but found 8   indent
+  116:1  error    Expected indentation of 2 spaces but found 4   indent
+  117:1  error    Expected indentation of 4 spaces but found 8   indent
+  117:9  warning  Unexpected console statement                   no-console
+  118:1  error    Expected indentation of 4 spaces but found 8   indent
+  119:1  error    Expected indentation of 2 spaces but found 4   indent
+
+/home/taques/Projetos/podwave/src/middlewares/auth.js
+  2:1  error  Expected indentation of 2 spaces but found 4  indent
+  3:1  error  Expected indentation of 4 spaces but found 8  indent
+  4:1  error  Expected indentation of 2 spaces but found 4  indent
+  5:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/repositories/avaliacoes.repository.js
+   4:1  error  Expected indentation of 2 spaces but found 4  indent
+   5:1  error  Expected indentation of 2 spaces but found 4  indent
+   6:1  error  Expected indentation of 4 spaces but found 8  indent
+   7:1  error  Expected indentation of 4 spaces but found 8  indent
+   8:1  error  Expected indentation of 4 spaces but found 8  indent
+   9:1  error  Expected indentation of 4 spaces but found 8  indent
+  10:1  error  Expected indentation of 4 spaces but found 8  indent
+  11:1  error  Expected indentation of 4 spaces but found 8  indent
+  12:1  error  Expected indentation of 2 spaces but found 4  indent
+  13:1  error  Expected indentation of 2 spaces but found 4  indent
+  17:1  error  Expected indentation of 2 spaces but found 4  indent
+  18:1  error  Expected indentation of 2 spaces but found 4  indent
+  19:1  error  Expected indentation of 4 spaces but found 8  indent
+  20:1  error  Expected indentation of 4 spaces but found 8  indent
+  21:1  error  Expected indentation of 4 spaces but found 8  indent
+  22:1  error  Expected indentation of 4 spaces but found 8  indent
+  23:1  error  Expected indentation of 4 spaces but found 8  indent
+  24:1  error  Expected indentation of 2 spaces but found 4  indent
+  25:1  error  Expected indentation of 2 spaces but found 4  indent
+  29:1  error  Expected indentation of 2 spaces but found 4  indent
+  30:1  error  Expected indentation of 2 spaces but found 4  indent
+  31:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/repositories/comentarios.repository.js
+   4:1  error  Expected indentation of 2 spaces but found 4  indent
+   5:1  error  Expected indentation of 2 spaces but found 4  indent
+   6:1  error  Expected indentation of 4 spaces but found 8  indent
+   7:1  error  Expected indentation of 4 spaces but found 8  indent
+   8:1  error  Expected indentation of 4 spaces but found 8  indent
+   9:1  error  Expected indentation of 4 spaces but found 8  indent
+  10:1  error  Expected indentation of 4 spaces but found 8  indent
+  11:1  error  Expected indentation of 2 spaces but found 4  indent
+  12:1  error  Expected indentation of 2 spaces but found 4  indent
+  16:1  error  Expected indentation of 2 spaces but found 4  indent
+  22:1  error  Expected indentation of 2 spaces but found 4  indent
+  23:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/repositories/episodios.repository.js
+   4:1  error    Expected indentation of 2 spaces but found 4   indent
+   5:1  error    Expected indentation of 4 spaces but found 8   indent
+   6:1  error    Expected indentation of 6 spaces but found 12  indent
+   7:1  error    Expected indentation of 6 spaces but found 12  indent
+   8:1  error    Expected indentation of 4 spaces but found 8   indent
+   9:1  error    Expected indentation of 4 spaces but found 8   indent
+  10:1  error    Expected indentation of 2 spaces but found 4   indent
+  11:1  error    Expected indentation of 4 spaces but found 8   indent
+  11:9  warning  Unexpected console statement                   no-console
+  12:1  error    Expected indentation of 4 spaces but found 8   indent
+  13:1  error    Expected indentation of 2 spaces but found 4   indent
+  17:1  error    Expected indentation of 2 spaces but found 4   indent
+  21:1  error    Expected indentation of 2 spaces but found 4   indent
+  22:1  error    Expected indentation of 4 spaces but found 8   indent
+  23:1  error    Expected indentation of 4 spaces but found 8   indent
+  24:1  error    Expected indentation of 4 spaces but found 8   indent
+  25:1  error    Expected indentation of 4 spaces but found 8   indent
+  26:1  error    Expected indentation of 4 spaces but found 8   indent
+  27:1  error    Expected indentation of 4 spaces but found 8   indent
+  28:1  error    Expected indentation of 4 spaces but found 8   indent
+  29:1  error    Expected indentation of 4 spaces but found 8   indent
+  30:1  error    Expected indentation of 4 spaces but found 8   indent
+  31:1  error    Expected indentation of 4 spaces but found 8   indent
+  32:1  error    Expected indentation of 2 spaces but found 4   indent
+  33:1  error    Expected indentation of 2 spaces but found 4   indent
+  37:1  error    Expected indentation of 2 spaces but found 4   indent
+  49:1  error    Expected indentation of 2 spaces but found 4   indent
+  50:1  error    Expected indentation of 4 spaces but found 8   indent
+  51:1  error    Expected indentation of 4 spaces but found 8   indent
+  52:1  error    Expected indentation of 4 spaces but found 8   indent
+  53:1  error    Expected indentation of 4 spaces but found 8   indent
+  54:1  error    Expected indentation of 4 spaces but found 8   indent
+  55:1  error    Expected indentation of 4 spaces but found 8   indent
+  56:1  error    Expected indentation of 4 spaces but found 8   indent
+  57:1  error    Expected indentation of 4 spaces but found 8   indent
+  58:1  error    Expected indentation of 4 spaces but found 8   indent
+  59:1  error    Expected indentation of 4 spaces but found 8   indent
+  60:1  error    Expected indentation of 2 spaces but found 4   indent
+  61:1  error    Expected indentation of 2 spaces but found 4   indent
+  65:1  error    Expected indentation of 2 spaces but found 4   indent
+  66:1  error    Expected indentation of 2 spaces but found 4   indent
+  67:1  error    Expected indentation of 2 spaces but found 4   indent
+  71:1  error    Expected indentation of 2 spaces but found 4   indent
+  72:1  error    Expected indentation of 4 spaces but found 8   indent
+  73:1  error    Expected indentation of 4 spaces but found 8   indent
+  74:1  error    Expected indentation of 2 spaces but found 4   indent
+  75:1  error    Expected indentation of 2 spaces but found 4   indent
+
+/home/taques/Projetos/podwave/src/repositories/favoritos.repository.js
+   4:1  error  Expected indentation of 2 spaces but found 4  indent
+   5:1  error  Expected indentation of 2 spaces but found 4  indent
+   6:1  error  Expected indentation of 4 spaces but found 8  indent
+   7:1  error  Expected indentation of 4 spaces but found 8  indent
+   8:1  error  Expected indentation of 4 spaces but found 8  indent
+   9:1  error  Expected indentation of 2 spaces but found 4  indent
+  10:1  error  Expected indentation of 2 spaces but found 4  indent
+  14:1  error  Expected indentation of 2 spaces but found 4  indent
+  15:1  error  Expected indentation of 2 spaces but found 4  indent
+  16:1  error  Expected indentation of 2 spaces but found 4  indent
+  20:1  error  Expected indentation of 2 spaces but found 4  indent
+  21:1  error  Expected indentation of 2 spaces but found 4  indent
+  22:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/repositories/podcasts.repository.js
+   4:1  error    Expected indentation of 2 spaces but found 4   indent
+   5:1  error    Expected indentation of 2 spaces but found 4   indent
+   6:1  error    Expected indentation of 4 spaces but found 8   indent
+   7:1  error    Expected indentation of 4 spaces but found 8   indent
+   8:1  error    Expected indentation of 4 spaces but found 8   indent
+   9:1  error    Expected indentation of 4 spaces but found 8   indent
+  10:1  error    Expected indentation of 4 spaces but found 8   indent
+  11:1  error    Expected indentation of 2 spaces but found 4   indent
+  12:1  error    Expected indentation of 2 spaces but found 4   indent
+  16:1  error    Expected indentation of 2 spaces but found 4   indent
+  17:1  error    Expected indentation of 4 spaces but found 8   indent
+  18:1  error    Expected indentation of 6 spaces but found 12  indent
+  20:1  error    Expected indentation of 6 spaces but found 12  indent
+  21:1  error    Expected indentation of 4 spaces but found 8   indent
+  22:1  error    Expected indentation of 4 spaces but found 8   indent
+  23:1  error    Expected indentation of 2 spaces but found 4   indent
+  24:1  error    Expected indentation of 4 spaces but found 8   indent
+  24:9  warning  Unexpected console statement                   no-console
+  25:1  error    Expected indentation of 4 spaces but found 8   indent
+  26:1  error    Expected indentation of 2 spaces but found 4   indent
+  30:1  error    Expected indentation of 2 spaces but found 4   indent
+  31:1  error    Expected indentation of 4 spaces but found 8   indent
+  32:1  error    Expected indentation of 6 spaces but found 12  indent
+  34:1  error    Expected indentation of 6 spaces but found 12  indent
+  35:1  error    Expected indentation of 4 spaces but found 8   indent
+  36:1  error    Expected indentation of 4 spaces but found 8   indent
+  37:1  error    Expected indentation of 2 spaces but found 4   indent
+  38:1  error    Expected indentation of 4 spaces but found 8   indent
+  38:9  warning  Unexpected console statement                   no-console
+  39:1  error    Expected indentation of 4 spaces but found 8   indent
+  40:1  error    Expected indentation of 2 spaces but found 4   indent
+  44:1  error    Expected indentation of 2 spaces but found 4   indent
+  45:1  error    Expected indentation of 4 spaces but found 8   indent
+  46:1  error    Expected indentation of 6 spaces but found 12  indent
+  48:1  error    Expected indentation of 4 spaces but found 8   indent
+  49:1  error    Expected indentation of 4 spaces but found 8   indent
+  50:1  error    Expected indentation of 2 spaces but found 4   indent
+  51:1  error    Expected indentation of 4 spaces but found 8   indent
+  51:9  warning  Unexpected console statement                   no-console
+  52:1  error    Expected indentation of 4 spaces but found 8   indent
+  53:1  error    Expected indentation of 2 spaces but found 4   indent
+  57:1  error    Expected indentation of 2 spaces but found 4   indent
+  58:1  error    Expected indentation of 4 spaces but found 8   indent
+  60:1  error    Expected indentation of 4 spaces but found 8   indent
+  61:1  error    Expected indentation of 2 spaces but found 4   indent
+  62:1  error    Expected indentation of 2 spaces but found 4   indent
+  66:1  error    Expected indentation of 2 spaces but found 4   indent
+  67:1  error    Expected indentation of 2 spaces but found 4   indent
+  68:1  error    Expected indentation of 4 spaces but found 8   indent
+  69:1  error    Expected indentation of 4 spaces but found 8   indent
+  70:1  error    Expected indentation of 4 spaces but found 8   indent
+  71:1  error    Expected indentation of 4 spaces but found 8   indent
+  72:1  error    Expected indentation of 4 spaces but found 8   indent
+  73:1  error    Expected indentation of 4 spaces but found 8   indent
+  74:1  error    Expected indentation of 2 spaces but found 4   indent
+  75:1  error    Expected indentation of 2 spaces but found 4   indent
+  79:1  error    Expected indentation of 2 spaces but found 4   indent
+  80:1  error    Expected indentation of 2 spaces but found 4   indent
+  81:1  error    Expected indentation of 2 spaces but found 4   indent
+  85:1  error    Expected indentation of 2 spaces but found 4   indent
+  86:1  error    Expected indentation of 4 spaces but found 8   indent
+  87:1  error    Expected indentation of 4 spaces but found 8   indent
+  88:1  error    Expected indentation of 2 spaces but found 4   indent
+  89:1  error    Expected indentation of 4 spaces but found 8   indent
+  89:9  warning  Unexpected console statement                   no-console
+  90:1  error    Expected indentation of 4 spaces but found 8   indent
+  91:1  error    Expected indentation of 2 spaces but found 4   indent
+  95:1  error    Expected indentation of 2 spaces but found 4   indent
+  96:1  error    Expected indentation of 2 spaces but found 4   indent
+
+/home/taques/Projetos/podwave/src/repositories/progresso.repository.js
+   4:1  error  Expected indentation of 2 spaces but found 4  indent
+  11:1  error  Expected indentation of 2 spaces but found 4  indent
+  12:1  error  Expected indentation of 4 spaces but found 8  indent
+  13:1  error  Expected indentation of 4 spaces but found 8  indent
+  14:1  error  Expected indentation of 4 spaces but found 8  indent
+  15:1  error  Expected indentation of 4 spaces but found 8  indent
+  16:1  error  Expected indentation of 2 spaces but found 4  indent
+  17:1  error  Expected indentation of 2 spaces but found 4  indent
+  21:1  error  Expected indentation of 2 spaces but found 4  indent
+  28:1  error  Expected indentation of 2 spaces but found 4  indent
+  29:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/repositories/usuarios.repository.js
+   5:1   error  Expected indentation of 2 spaces but found 4  indent
+   6:1   error  Expected indentation of 2 spaces but found 4  indent
+   7:1   error  Expected indentation of 2 spaces but found 4  indent
+   8:1   error  Expected indentation of 2 spaces but found 4  indent
+  12:1   error  Expected indentation of 2 spaces but found 4  indent
+  13:1   error  Expected indentation of 2 spaces but found 4  indent
+  14:1   error  Expected indentation of 2 spaces but found 4  indent
+  14:28  error  Expected { after 'if' condition               curly
+  15:1   error  Expected indentation of 2 spaces but found 4  indent
+  16:1   error  Expected indentation of 2 spaces but found 4  indent
+  20:1   error  Expected indentation of 2 spaces but found 4  indent
+  21:1   error  Expected indentation of 2 spaces but found 4  indent
+  22:1   error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/routes/episodios.routes.js
+   4:1  error  Expected indentation of 2 spaces but found 4  indent
+   5:1  error  Expected indentation of 2 spaces but found 4  indent
+   6:1  error  Expected indentation of 2 spaces but found 4  indent
+   7:1  error  Expected indentation of 2 spaces but found 4  indent
+   8:1  error  Expected indentation of 2 spaces but found 4  indent
+   9:1  error  Expected indentation of 2 spaces but found 4  indent
+  10:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/routes/meusEpisodios.routes.js
+  4:1  error  Expected indentation of 2 spaces but found 4  indent
+  5:1  error  Expected indentation of 2 spaces but found 4  indent
+  6:1  error  Expected indentation of 2 spaces but found 4  indent
+  7:1  error  Expected indentation of 2 spaces but found 4  indent
+  8:1  error  Expected indentation of 2 spaces but found 4  indent
+  9:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/routes/meusPodcasts.routes.js
+  4:1  error  Expected indentation of 2 spaces but found 4  indent
+  5:1  error  Expected indentation of 2 spaces but found 4  indent
+  6:1  error  Expected indentation of 2 spaces but found 4  indent
+  7:1  error  Expected indentation of 2 spaces but found 4  indent
+  8:1  error  Expected indentation of 2 spaces but found 4  indent
+  9:1  error  Expected indentation of 2 spaces but found 4  indent
+
+/home/taques/Projetos/podwave/src/server.js
+   7:1  error    Expected indentation of 2 spaces but found 4  indent
+   8:1  error    Expected indentation of 2 spaces but found 4  indent
+   8:5  warning  Unexpected console statement                  no-console
+  10:1  error    Expected indentation of 2 spaces but found 4  indent
+  10:5  warning  Unexpected console statement                  no-console
+  11:1  error    Expected indentation of 2 spaces but found 4  indent
+  11:5  warning  Unexpected console statement                  no-console
+  15:1  error    Expected indentation of 2 spaces but found 4  indent
+  15:5  warning  Unexpected console statement                  no-console
+  19:1  error    Expected indentation of 2 spaces but found 4  indent
+  20:1  error    Expected indentation of 4 spaces but found 8  indent
+  20:9  warning  Unexpected console statement                  no-console
+  21:1  error    Expected indentation of 4 spaces but found 8  indent
+  22:1  error    Expected indentation of 2 spaces but found 4  indent
+  23:1  error    Expected indentation of 2 spaces but found 4  indent
+
+✖ 725 problems (693 errors, 32 warnings)
+  693 errors and 0 warnings potentially fixable with the `--fix` option.
+
