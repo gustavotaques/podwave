@@ -24,6 +24,7 @@ export async function listarMeusEpisodios(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar gestão de episódios:', err);
     res.redirect('/meusPodcasts?error=Erro ao carregar gestão de episódios');
   }
@@ -44,6 +45,7 @@ export async function exibirAdicaoEpisodio(req, res) {
       error: req.query.error
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar formulário de adição de episódio:', err);
     res.redirect(`/meusEpisodios/${podcodigo}?error=Erro ao carregar formulário`);
   }
@@ -72,6 +74,7 @@ export async function adicionarEpisodio(req, res) {
     });
     res.redirect(`/meusEpisodios/${podcodigo}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao adicionar episódio:', err);
     res.redirect(`/meusEpisodios/${podcodigo}/adicionar?error=Erro ao adicionar episódio`);
   }
@@ -93,6 +96,7 @@ export async function exibirEdicaoEpisodio(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar edição de episódio:', err);
     res.redirect(`/meusEpisodios/${req.params.podcodigo}?error=Erro ao carregar edição`);
   }
@@ -121,6 +125,7 @@ export async function editarEpisodio(req, res) {
     });
     res.redirect(`/meusEpisodios/${podcodigo}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao atualizar episódio:', err);
     res.redirect(`/meusEpisodios/${podcodigo}/${epicodigo}/editar?error=Erro ao atualizar episódio`);
   }
@@ -137,6 +142,7 @@ export async function excluirEpisodio(req, res) {
     await deletarEpisodio(epicodigo, podcodigo);
     res.redirect(`/meusEpisodios/${podcodigo}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao deletar episódio:', err);
     res.redirect(`/meusEpisodios/${podcodigo}?error=Erro ao deletar episódio`);
   }

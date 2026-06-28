@@ -20,6 +20,7 @@ export async function listarMeusPodcasts(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar gestão de podcasts:', err);
     res.render('meusPodcasts', {
       title: 'Podwave - Gerenciar Meus Podcasts',
@@ -47,6 +48,7 @@ export async function exibirEdicaoPodcast(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar edição de podcast:', err);
     res.redirect('/meusPodcasts');
   }
@@ -63,6 +65,7 @@ export async function exibirAdicaoPodcast(req, res) {
       error: req.query.error
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar formulário de adição:', err);
     res.redirect('/meusPodcasts?error=Erro ao carregar formulário');
   }
@@ -83,6 +86,7 @@ export async function adicionarPodcast(req, res) {
     });
     res.redirect('/meusPodcasts');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao adicionar podcast:', err);
     res.redirect('/meusPodcasts/adicionar?error=Erro ao adicionar podcast');
   }
@@ -103,6 +107,7 @@ export async function editarPodcast(req, res) {
     });
     res.redirect('/meusPodcasts');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao atualizar podcast:', err);
     res.redirect(`/meusPodcasts/editar/${podcodigo}?error=Erro ao atualizar podcast`);
   }
@@ -114,6 +119,7 @@ export async function excluirPodcast(req, res) {
     await deletarPodcast(req.params.podcodigo, usuario.codigo);
     res.redirect('/meusPodcasts');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao deletar podcast:', err);
     res.redirect('/meusPodcasts?error=Erro ao deletar podcast');
   }

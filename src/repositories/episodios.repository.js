@@ -8,6 +8,7 @@ export async function buscarEpisodiosPorPodcast(podcodigo) {
     );
     return rows;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao buscar episódios por podcast:', err);
     return [];
   }

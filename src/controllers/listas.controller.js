@@ -16,6 +16,7 @@ export async function listarPodcasts(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar podcasts:', err);
     res.render('listas', {
       title: 'Podwave - Listas de Podcasts',

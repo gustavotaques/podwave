@@ -17,6 +17,7 @@ export async function efetuarLogin(req, res) {
     req.session.usuario = { codigo: usuario.usucodigo, email: usuario.usuemail };
     return res.redirect('/listas');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao fazer login:', err);
     return res.redirect('/login?erro=1');
   }

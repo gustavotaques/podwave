@@ -21,6 +21,7 @@ export async function buscarPodcastsPorUsuario(usucodigo) {
     );
     return rows;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao buscar podcasts por usuário:', err);
     return [];
   }
@@ -35,6 +36,7 @@ export async function buscarPodcastsPorCategoria(catcodigo) {
     );
     return rows;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao buscar podcasts por categoria:', err);
     return [];
   }
@@ -48,6 +50,7 @@ export async function buscarTodosPodcasts() {
     );
     return rows;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao buscar todos os podcasts:', err);
     return [];
   }
@@ -86,6 +89,7 @@ export async function buscarCategorias() {
     const [rows] = await pool.query('SELECT catcodigo, catnome FROM categorias');
     return rows;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao buscar categorias:', err);
     return [];
   }

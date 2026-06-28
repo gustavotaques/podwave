@@ -26,6 +26,7 @@ export async function listarEpisodios(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar episódios:', err);
     res.render('episodios', {
       title: 'PodWave - Episódios',
@@ -68,6 +69,7 @@ export async function exibirEpisodio(req, res) {
       query: req.query
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao carregar detalhes do episódio:', err);
     res.redirect(`/episodios/${podcodigo}?error=Erro ao carregar episódio`);
   }
@@ -87,6 +89,7 @@ export async function comentarEpisodio(req, res) {
     });
     res.redirect(`/episodios/${podcodigo}/${epicodigo}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao adicionar comentário:', err);
     res.redirect(`/episodios/${podcodigo}/${epicodigo}?error=Erro ao comentar`);
   }
@@ -122,6 +125,7 @@ export async function avaliarEpisodio(req, res) {
 
     res.redirect(`/episodios/${podcodigo}/${epicodigo}?avaliacao=${nota}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao avaliar episódio:', err);
     res.redirect(`/episodios/${podcodigo}/${epicodigo}?error=Erro ao processar a avaliação`);
   }
@@ -143,6 +147,7 @@ export async function alternarFavorito(req, res) {
     }
     res.redirect(`/episodios/${podcodigo}/${epicodigo}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao favoritar/desfavoritar:', err);
     res.redirect(`/episodios/${podcodigo}/${epicodigo}?error=Erro ao favoritar`);
   }
@@ -162,6 +167,7 @@ export async function salvarProgresso(req, res) {
     });
     res.redirect(`/episodios/${podcodigo}/${epicodigo}`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Erro ao atualizar progresso:', err);
     res.redirect(`/episodios/${podcodigo}/${epicodigo}?error=Erro ao atualizar progresso`);
   }
@@ -217,6 +223,7 @@ export function transmitirAudio(req, res) {
       }
     })
     .catch(err => {
+      // eslint-disable-next-line no-console
       console.error('Erro ao carregar áudio:', err);
       res.status(500).send('Erro ao carregar o áudio');
     });

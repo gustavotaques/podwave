@@ -54,6 +54,7 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
